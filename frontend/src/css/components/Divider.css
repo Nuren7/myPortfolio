@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/*Grey divider */
+.grey-divider {
+  height: 1px;           /* Very thin for maximum elegance */
+  width:35%;
+  background-color: #9e9e9e; /* A clean, "Normal" Grey (Tailwind gray-300) */
+  
+  /* A small, subtle shadow to give it just a tiny bit of depth */
+  box-shadow: 0 1px 2px rgba(85, 85, 85, 0.1);
+  
+  margin: 1.5rem 0;
+  border: none;
+}

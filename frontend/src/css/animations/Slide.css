@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+
+/* Slide in up*/ 
+@theme {
+  --animate-slide-In-Up: slide-In-Up 1s ease-in-out forwards;
+  @keyframes slide-In-Up {
+      0% {
+        transform: translateY(20%);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+  }
+}
+
+/* Slide in down*/
+@theme {
+  --animate-slide-In-Down: slide-In-Down 1s ease-in-out forwards;
+  @keyframes slide-In-Down {
+      0% {
+        transform: translateY(-20%);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+  }
+}
+
+/* Slide out -------------------------------------------------------------------------- */
+
+/* slide out down */
+@theme {
+
+--animate-slide-Out-Down: slide-Out-Down 1s ease-in-out forwards;
+
+@keyframes slide-Out-Down {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(7%);
+    opacity: 0;
+  }
+}
+}
+
+
+
+/* slide out down */
+@theme {
+
+--animate-slide-Out-Up: slide-Out-Up 1s ease-in-out forwards;
+
+@keyframes slide-Out-Up {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-2%);
+    opacity: 0;
+  }
+}
+}
+/* --------------------------------------------------------------------------- */
+
+/* Slide in right*/
+@theme {
+  --animate-slide-In-Right: slide-In-Right 1s ease-in-out forwards;
+  @keyframes slide-In-Right {
+      0% {
+        transform: translateX(-4%);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+  }
+}
+
+/* Slide in left*/
+@theme {
+  --animate-slide-In-Left: slide-In-Left 1s ease-in-out forwards;
+  @keyframes slide-In-Left {
+      0% {
+        transform: translateX(4%);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+  }
+}
