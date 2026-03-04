@@ -8,6 +8,7 @@ import "./css/components/GoldComponents.css"
 import "./css/components/Divider.css"
 import "./css/animations/Fade.css"
 import "./css/animations/Slide.css"
+import "./css/animations/InfiniteScroll.css"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
