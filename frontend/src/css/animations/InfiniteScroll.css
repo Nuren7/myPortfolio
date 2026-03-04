@@ -10,5 +10,5 @@
 }
 
 .animate-infiniteScroll {
-  animation: infiniteScroll 20s linear infinite;
+  animation: infiniteScroll 50s linear infinite;
 }
