@@ -9,7 +9,7 @@ function Button({ to, children }) {
       className="
         flex
         font-medium
-        text-lg
+        text-lg 
         text-stone-500 
         px-1 
         transition-colors 
