@@ -16,6 +16,21 @@
   }
 }
 
+/* Slide in up slow*/ 
+@theme {
+  --animate-slide-In-Up-Slow: slide-In-Up-Slow 2.5s ease-in-out forwards;
+  @keyframes slide-In-Up-Slow {
+      0% {
+        transform: translateY(20%);
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+  }
+}
+
 /* Slide in down*/
 @theme {
   --animate-slide-In-Down: slide-In-Down 1s ease-in-out forwards;

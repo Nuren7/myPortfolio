@@ -2,11 +2,11 @@ import React from 'react'
 
 function HeroImage() {
   return (
-     <div className="w-full h-screen">
+     <div className="flex w-full h-screen z-10">
       <img
         src="/img_of_me3.png"
         alt="Portrait of me"
-        className="fixed bottom-0 left-[5%] w-[60%] object-contain animate-slide-In-Up"
+        className="hero-image animate-slide-In-Up"
       />
     </div>
 

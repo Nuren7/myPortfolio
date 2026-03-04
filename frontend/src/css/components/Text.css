@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@layer components {
+  .hero-title {
+    @apply 
+      text-sm
+      sm:text-lg
+      md:text-xl
+      lg:text-2xl
+      leading-tight;
+  }
+}

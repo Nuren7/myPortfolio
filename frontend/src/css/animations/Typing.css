@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  position: relative;
+  animation: typing 4s steps(20, end) forwards;
+}
+
+
+.animate-typing::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: white;
+  animation: blink 0.8s step-end infinite;
+}
+
+
+.delay-2 {
+  animation-delay: 2s;
+}
+
+.delay-4 {
+  animation-delay: 4s;
+}
+
+.delay-6 {
+  animation-delay: 6s;
+}

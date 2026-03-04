@@ -7,17 +7,10 @@ function Button({ to, children }) {
     <Link
       to={to}
       className="
-        flex
-        font-medium
-        text-lg
-        text-stone-500 
-        px-1 
-        transition-colors 
-        duration-500
-        hover:text-gray-400
-        hover:opacity-80
+        btn-link
         slow-underline
-      ">
+      "
+    >
       {children}
     </Link>
   )
