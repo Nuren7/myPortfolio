@@ -1,16 +1,21 @@
+@import "./../index.css";
 @import "tailwindcss";
 
 @layer components {
-  .hero-image {
-    @apply
-      fixed
-      bottom-0
-      left-[40%]
-      -translate-x-1/2
-      sm:w-full
-      md:w-[90%]
-      lg:w-[70%]
-      xl:w-[60%]
-      object-contain;
+.hero-image {
+  @apply
+    fixed
+    bottom-0
+    left-[30%]
+    -translate-x-1/2
+    w-[120%]      
+    sm:w-full     
+    md:w-[90%]    
+    lg:w-[60%]    
+    l:w-[80%]     
+    xl:w-[80%]    
+    object-contain
+    pointer-events-none
+    select-none;
   }
 }
