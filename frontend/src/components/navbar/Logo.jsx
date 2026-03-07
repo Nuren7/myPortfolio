@@ -1,10 +1,10 @@
 import React, { Children } from 'react'
 import { Link } from 'react-router-dom'
 
-function Logo({to,src,alt}) {
+function Logo({onClick,src,alt}) {
   return (
     <div className='w-24 sm:w-24 md:w-24 lg:w-32'>
-    <Link to= {to} className='inline-flex items-center group'>
+    <Link onClick={onClick} className='inline-flex items-center group'>
       
       <img  
         src = {src}

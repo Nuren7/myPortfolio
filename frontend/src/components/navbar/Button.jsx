@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Button({ to, children }) {
+function Button({ onClick ,children }) {
   
   return (
     <Link
-      to={to}
+      onClick={onClick}
       className="
         btn-link
         slow-underline
