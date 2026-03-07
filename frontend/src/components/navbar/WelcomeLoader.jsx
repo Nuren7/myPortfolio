@@ -1,6 +1,31 @@
-import React from 'react'
+import React from 'react';
+import {useState, useEffect} from 'react'
 
-function WelcomeLoader({active}) {
+function WelcomeLoader({active, pageName}) {
+  const greetings = pageName === "Home" ? ["Hello", "As-salamu alaykum", "welcome", pageName] : 
+  [pageName];
+  const [index, setindex] = useState(0);
+
+    useEffect(() => {
+      if (!active) return;
+
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setindex(0);
+
+      const interval = setInterval(() => {
+        setindex((prev) => {
+          if (prev >= greetings.length - 1) {
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 150);
+
+      return () =>  clearInterval(interval);
+
+    }, [active, greetings.length]);
+
 
   return (
     <div className={`
@@ -10,10 +35,11 @@ function WelcomeLoader({active}) {
     ${active ? "opacity-100" : "opacity-0"}
     `}
     >
-      <h1>Welcome</h1>
+      <h1>{greetings[index]}</h1>
 
     </div>
   )
-}
+} 
+
 
 export default WelcomeLoader
