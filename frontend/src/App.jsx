@@ -13,8 +13,8 @@ import WelcomeLoader from './components/navbar/WelcomeLoader'
 function App() {
   return (
     <>  
+    
       <Navbar />
-      <WelcomeLoader active={false}/>
       
       <Routes>
         <Route path="/" element={<Home />} /> 

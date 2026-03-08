@@ -11,7 +11,7 @@ function usePageTransition() {
     setTimeout(() => {
       navigate(url);
       setLoading(false);
-    }, 1000);
+    }, 1500);
   }
 
   return {

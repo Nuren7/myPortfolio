@@ -1,15 +1,16 @@
 import React from 'react';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useMemo} from 'react'
 
 function WelcomeLoader({active, pageName}) {
-  const greetings = pageName === "Home" ? ["Hello", "As-salamu alaykum", "welcome", pageName] : 
-  [pageName];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const greetings = useMemo(() =>  pageName === "Home" ? ["Hello", "As-salamu alaykum", "welcome", pageName] : 
+  [pageName]
+  );
   const [index, setindex] = useState(0);
 
     useEffect(() => {
       if (!active) return;
 
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setindex(0);
 
       const interval = setInterval(() => {
@@ -20,7 +21,7 @@ function WelcomeLoader({active, pageName}) {
           }
           return prev + 1;
         });
-      }, 150);
+      }, 300);
 
       return () =>  clearInterval(interval);
 
@@ -30,12 +31,17 @@ function WelcomeLoader({active, pageName}) {
   return (
     <div className={`
     fixed inset-0 z-50 flex items-center justify-center
-    bg-black text-4xl text-white font-bold
-    transition-opacity duration-500 ease-out pointer-events-none
-    ${active ? "opacity-100" : "opacity-0"}
+    bg-black
+    ${active ? "animate-page-intro" : "animate-page-outro pointer-events-none"}
     `}
     >
-      <h1>{greetings[index]}</h1>
+    <div className='overflow-hidden'>
+
+      <h1 key={index} className="text-4xl text-stone-200 font-medium font-monteserrat animate-text-in">
+        {greetings[index]}
+      </h1>
+
+    </div>
 
     </div>
   )
