@@ -34,7 +34,7 @@ function Navbar() {
 
     {showNavbar && (
       <nav className="
-        navbar-style">
+        navbar-style animate-slide-In-Down">
 
         <Logo onClick={() => {setPageName("Home");goTo('/');}} src="/my_logo.png" alt="my_logo" />
 
