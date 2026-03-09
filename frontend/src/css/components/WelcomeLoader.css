@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-text-in: text-in 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+
+  --animate-page-intro: page-down 0.4s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  --animate-page-outro: page-up 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+
+  @keyframes text-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes page-down {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  @keyframes page-up {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
+}

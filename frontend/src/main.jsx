@@ -9,7 +9,7 @@ import "./css/components/Navbar.css"
 import "./css/components/Button.css"
 import "./css/components/Text.css"
 import "./css/components/Image.css"
-
+import "./css/components/WelcomeLoader.css"
 
 
 import "./css/animations/Fade.css"

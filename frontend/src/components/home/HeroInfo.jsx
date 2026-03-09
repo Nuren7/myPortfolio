@@ -4,13 +4,13 @@ import { useState, useEffect } from "react"
 function HeroInfo() {
   const words = [
     "Hi, I'm Nuren a FullStack Developer",
-    "Here are my passions",
+    "Here are some of my passions",
     "Frontend Developing",
     "React JSX TailwindCSS",
     "Backend Developing",
     "Node.js Express MongoDB",
     "AWS SQL NoSQL",
-    "Cybersecurity Enthusiast",
+    "Cybersecurity",
     "Ethical Hacking Penetration Testing Kali Linux"
   ]
 
@@ -55,6 +55,7 @@ function HeroInfo() {
   }, [charIndex, isDeleting, wordIndex, words])
 
   return (
+    
     <div className="fixed inset-0 flex items-center justify-end px-10 text-right">
       <h1 className="hero-title font-montserrat text-stone-500">
         {text}
