@@ -52,3 +52,39 @@
   overflow-x: hidden; 
   height: 100%;
 }
+
+/* Breakpoints */
+
+/* breakpoints according to google dev tools */
+@theme {
+  --breakpoint-xxxs: 20rem; /* mobile s */
+  --breakpoint-xxs: 23rem; /* mobile m */
+  --breakpoint-xs: 26rem; /* mobile l */
+  --breakpoint-s: 48rem; /* tablet */
+  --breakpoint-m: 64rem; /* laptop */
+  --breakpoint-l: 90rem; /* laptop l */
+  --breakpoint-xl: 160rem;/* 4k */
+}
+
+/* Standard breakpoints for each screen size */
+@layer base {
+  html {
+    
+    font-size: clamp(12px, 1.5vw + 6px, 18px); 
+  }
+
+  /* For large desktops */
+  @media (min-width: 90rem) {
+    html {
+      font-size: clamp(18px, 2vw + 10px, 25px);
+    }
+  }
+
+  /* For 4k screens */
+  @media (min-width: 160rem) {
+    html {
+      font-size: clamp(25px, 3vw + 10px, 40px);
+    }
+  }
+}
+
