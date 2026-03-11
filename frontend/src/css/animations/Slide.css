@@ -1,61 +1,58 @@
 @import "tailwindcss";
 
-
-/* Slide in up*/ 
 @theme {
-  --animate-slide-In-Up: slide-In-Up 1s ease-in-out forwards;
-  @keyframes slide-In-Up {
-      0% {
-        transform: translateY(20%);
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0%);
-    }
-  }
+
+  --animate-slide-In-Up: slideInUp 1s ease-in-out forwards;
+  --animate-slide-In-Up-Slow: slideInUpSlow 2.5s ease-in-out forwards;
+  --animate-slide-In-Down: slideInDown 1s ease-in-out forwards;
+
+  --animate-slide-Out-Down: slideOutDown 1s ease-in-out forwards;
+  --animate-slide-Out-Up: slideOutUp 1s ease-in-out forwards;
+
+  --animate-slide-In-Right: slideInRight 1s ease-in-out forwards;
+  --animate-slide-In-Left: slideInLeft 1s ease-in-out forwards;
 }
 
-/* Slide in up slow*/ 
-@theme {
-  --animate-slide-In-Up-Slow: slide-In-Up-Slow 2.5s ease-in-out forwards;
-  @keyframes slide-In-Up-Slow {
-      0% {
-        transform: translateY(20%);
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0%);
-    }
-  }
-}
-
-/* Slide in down*/
-@theme {
-  --animate-slide-In-Down: slide-In-Down 1s ease-in-out forwards;
-  @keyframes slide-In-Down {
-      0% {
-        transform: translateY(-20%);
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0%);
-    }
-  }
-}
-
-/* Slide out -------------------------------------------------------------------------- */
-
-/* slide out down */
-@theme {
-
---animate-slide-Out-Down: slide-Out-Down 1s ease-in-out forwards;
-
-@keyframes slide-Out-Down {
+/* Slide In Up */
+@keyframes slideInUp {
   0% {
-    transform: translateY(0%);
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide In Up Slow */
+@keyframes slideInUpSlow {
+  0% {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide In Down */
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide Out Down */
+@keyframes slideOutDown {
+  0% {
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
@@ -63,18 +60,11 @@
     opacity: 0;
   }
 }
-}
 
-
-
-/* slide out down */
-@theme {
-
---animate-slide-Out-Up: slide-Out-Up 1s ease-in-out forwards;
-
-@keyframes slide-Out-Up {
+/* Slide Out Up */
+@keyframes slideOutUp {
   0% {
-    transform: translateY(0%);
+    transform: translateY(0);
     opacity: 1;
   }
   100% {
@@ -82,35 +72,27 @@
     opacity: 0;
   }
 }
-}
-/* --------------------------------------------------------------------------- */
 
-/* Slide in right*/
-@theme {
-  --animate-slide-In-Right: slide-In-Right 1s ease-in-out forwards;
-  @keyframes slide-In-Right {
-      0% {
-        transform: translateX(-4%);
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0%);
-    }
+/* Slide In Right */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(-4%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
-/* Slide in left*/
-@theme {
-  --animate-slide-In-Left: slide-In-Left 1s ease-in-out forwards;
-  @keyframes slide-In-Left {
-      0% {
-        transform: translateX(4%);
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0%);
-    }
+/* Slide In Left */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(4%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
