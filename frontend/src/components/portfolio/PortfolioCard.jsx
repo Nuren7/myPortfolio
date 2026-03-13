@@ -1,50 +1,61 @@
 import React from 'react'
 import { useState } from "react"
 
+import Slider from './Slider';
+
 function PortfolioCard() {
   const projects = [
     {
       id: 1,
-      image: "/images/project1.png",
+      image: "/prototype1.png",
       title: "Portfolio",
       description: "My personal portfolio site"
     },
     {
       id: 2,
-      image: "/images/project2.png",
+      image: "/prototype2.png",
       title: "Todo App",
       description: "A simple todo app"
     },
     {
       id: 3,
-      image: "/images/project3.png",
+      image: "/prototype3.png",
       title: "Weather App",
       description: "Weather forecast application"
     }
   ];
+
   const [activeIndex ,setActiveIndex] = useState(0)
 
   const next = () => {
-    setActiveIndex((activeIndex + 1) % projects.length)
+    setActiveIndex(i => (i + 1) % projects.length)
   }
   const prev = () => {
-    setActiveIndex((activeIndex - 1 + projects.length) % projects.length)
+    setActiveIndex(i => (i - 1 + projects.length) % projects.length)
   }
+
+  const currentProject = projects[activeIndex]
 
   return (
     <div>
 
       <button onClick={prev}>prev</button>
 
-      <img src={projects[activeIndex].image} alt={projects[activeIndex].title}/>
-      <h2>
-        {projects[activeIndex].title}
+      <Slider 
+        projects={projects}
+        activeIndex={activeIndex}
+      />
+
+      <button  onClick={next}>next</button>
+
+      <div>
+         <h2>
+        {currentProject.title}
       </h2>
       <p>
-        {projects[activeIndex].description}
+        {currentProject.description}
       </p>
-
-      <button onClick={next}>next</button>
+      </div>
 
     </div>
 
