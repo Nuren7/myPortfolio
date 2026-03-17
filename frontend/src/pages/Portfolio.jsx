@@ -1,12 +1,13 @@
 import React from 'react'
 
-import PortfolioCard from '../components/portfolio/PortfolioCard'
+/* import PortfolioCard from '../components/portfolio/PortfolioCard' */
+import PortfolioHero from '../components/portfolio/PortfolioHero'
 
 
 function Portfolio() {
   return (
     <div>
-      <PortfolioCard />
+      <PortfolioHero />
 
     </div>
   )

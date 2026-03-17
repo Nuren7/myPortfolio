@@ -8,7 +8,6 @@ import Navbar from './components/navbar/Navbar'
 import Contact from './pages/Contact'
 import Portfolio from './pages/Portfolio'
 import About from './pages/About'
-import WelcomeLoader from './components/navbar/WelcomeLoader'
 
 function App() {
   return (

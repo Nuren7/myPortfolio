@@ -1,31 +1,33 @@
-import React from 'react'
+import React from "react";
 
-export default function Slider({projects, activeIndex}) {
-
-  const nextIndex = (activeIndex + 1) % projects.length
-  const prevIndex = (activeIndex - 1 + projects.length) % projects.length 
+export default function Slider({ projects, activeIndex }) {
   return (
-    <div className='slideC'>
-      {projects.map((project , index) =>  { 
+    <div className="w-[900px] h-[420px] overflow-hidden flex items-center">
 
-        let position = ""
-
-        if (index === activeIndex) position = "active"
-        else if (index === prevIndex) position = "prev"
-        else if (index === nextIndex) position = "next"
-
-        return (
-          <img 
+      <div
+        className="flex gap-6 transition-transform duration-500"
+        style={{
+          transform: `translateX(-${activeIndex * 320}px)`
+        }}
+      >
+        {projects.map((project, index) => (
+          <div
             key={project.id}
-            className={`slide ${position}`}
-            src={project.image}
-            alt={project.title}/>
-        )
-    
-        })}
-
-
+            className={`flex-shrink-0 transition-all duration-500
+              ${index === activeIndex
+                ? "scale-100 opacity-100"
+                : "scale-75 opacity-40"}
+            `}
+          >
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-[600px] h-[360px] object-cover rounded-lg"
+            />
+          </div>
+        ))}
+      </div>
 
     </div>
-  )
+  );
 }
