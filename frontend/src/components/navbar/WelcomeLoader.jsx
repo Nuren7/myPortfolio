@@ -3,8 +3,8 @@ import {useState, useEffect, useMemo} from 'react'
 
 function WelcomeLoader({active, pageName}) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const greetings = useMemo(() =>  pageName === "Home" ? ["Hello", "As-salamu alaykum", "welcome", "•"+pageName] : 
-  ["•"+pageName]
+  const greetings = useMemo(() =>  pageName === "Home" ? ["Hello", "As-salamu alaykum", "welcome", "•"+pageName+"•"] : 
+  ["•"+pageName+"•"]
   );
   const [index, setindex] = useState(0);
   // eslint-disable-next-line no-unused-vars

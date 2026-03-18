@@ -1,0 +1,13 @@
+@reference "../../Index.css";
+@import "tailwindcss";
+
+.hero-title {
+  font-size: clamp(0.5rem, 1.5vw, 3rem); 
+  font-family: var(--font-montserrat);
+}
+
+.hero-image {
+  @apply fixed bottom-0 left-[30%] -translate-x-1/2
+         w-[120%] sm:w-full md:w-[90%] lg:w-[60%] xl:w-[80%]
+         object-contain pointer-events-none select-none;
+}
