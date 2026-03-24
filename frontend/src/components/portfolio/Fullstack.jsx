@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Projects() {
+function Fullstack() {
   const projects = [
     {
       id: 1,
@@ -33,25 +33,13 @@ function Projects() {
   return (
     <div className="flex flex-col">
 
-
-      <section className='flex w-full'>
-        <h3 className='flex items-center justify-center w-full'>
-          <span className='grey-divider'></span>
-          <span className='mx-8 text-lg font-raleway font-bold uppercase'>
-            Projects
-          </span> 
-          <span className='grey-divider'></span>  
-        </h3>
-      </section>
-      
-
       <section>
 
         <div className="flex w-full items-start justify-between gap-10 pt-10">
 
           <div className="pl-46 pt-20">
             <h3 className="project-title">
-              Frontend
+              Fullstack
             </h3>
           </div>
 
@@ -104,4 +92,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default Fullstack;

@@ -14,8 +14,8 @@ export default function PortfolioHero() {
   return (
     <div className="portfolioHero">
 
+
       <div className="portfolioHero-imageWrapper">
-        
         <div
           className="portfolioHero-track"
           style={{
@@ -31,7 +31,6 @@ export default function PortfolioHero() {
             />
           ))}
         </div>
-
       </div>
 
       {/* BUTTONS */}
@@ -40,7 +39,7 @@ export default function PortfolioHero() {
           <div
             key={img.key}
             onMouseEnter={() => setActive(img.key)}
-            className={`portfolioHero-btn slow-underline ${active === img.key ? "active" : ""}`}
+            className={`portfolioHero-btn ${active === img.key ? "active" : ""}`}
           >
             {img.key}
           </div>
