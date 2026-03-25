@@ -37,58 +37,52 @@ function Fullstack() {
 
         <div className="flex w-full items-start justify-between gap-10 pt-10">
 
-          <div className="pl-46 pt-20">
-            <h3 className="project-title">
-              Fullstack
-            </h3>
+        <div className='ml-36'>
+          <div className="carousel flex flex-col items-center">
+            <div
+              className="slider-track"
+              style={{
+                transform: `translateX(-${activeIndex * 100}%)`
+              }}
+            >
+              {projects.map((project) => (
+                <div key={project.id} className="card">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className='mr-36'> 
-            <div className="carousel flex flex-col items-center">
-
-              <div
-                className="slider-track"
-                style={{
-                  transform: `translateX(-${activeIndex * 100}%)`
-                }}
-              >
-                {projects.map((project) => (
-                  <div key={project.id} className="card">
-
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* BUTTONS */}
-            <div className="flex justify-center items-center gap-50 mt-1">
-              <button onClick={prev} className="cursor-pointer text-2xl">
-                ←
-              </button>
-
-              <button onClick={next} className="cursor-pointer text-2xl">
-                →
-              </button>
-            </div>
-
+          <div className="flex justify-center items-center gap-50 mt-1">
+            <button onClick={prev} className="cursor-pointer text-2xl">
+              ←
+            </button>
+            <button onClick={next} className="cursor-pointer text-2xl">
+              →
+            </button>
           </div>
-
         </div>
 
-      </section>
+        <div className="pr-55 pt-20">
+          <h3 className="project-title">
+            Full <br /> <div className='translate-y-[-50%] translate-x-[40%]'>stack</div>
+          </h3>
+        </div>
+
+       </div>
+        </section>
       
-      <section className='flex items-center justify-center w-full'>
+          <section className='flex items-center justify-center w-full'>
 
-        <div className='grey-dividerFull'/>
+      <div className='grey-dividerFull'/>
       
-      </section>
+    </section>
 
 
-    </div>
+  </div>
   );
 }
 

@@ -4,9 +4,9 @@
 @layer components {
 
 .navbar-style {
-  @apply fixed top-0 left-0 z-50
+  @apply absolute top-0 left-0 w-full z-50
          flex justify-between items-center
-         bg-transparent w-full
+         bg-transparent
          px-4 sm:px-8 lg:px-16 p-6;
 }
 

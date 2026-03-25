@@ -5,27 +5,28 @@ import {SiJavascript,SiTypescript,SiTailwindcss,SiMongodb,SiNextdotjs, SiHeroku}
 
 function PortfolioScroll() {
   const skills = [
-  <FaHtml5 />,
-  <FaCss3Alt />,
-  <SiTailwindcss />,
+  <FaHtml5 className="text-[#E34F26]" />,
+  <FaCss3Alt />, 
+  <SiTailwindcss className="text-[#06B6D4]" />,
 
-  <FaReact />,
-  <FaAngular />,
+  <FaReact />,     
+  <FaAngular className="text-[#DD0031]" />,    
   <FaVuejs />,
-  <FaGithub />,
+  <FaGithub className="text-[#181717]" />,   
   <FaDocker />,
 
-  <SiNextdotjs />,
-  <FaNodeJs />,
+  <SiNextdotjs className="text-black dark:text-white" />,
+  <FaNodeJs />,  
 
-  <FaPython />,
+  <FaPython className="text-[#3776AB]" />,   
   <SiJavascript />,
-  <SiTypescript />,
+  <SiTypescript className="text-[#3178C6]" />,  
 
   <SiHeroku />,
 
-  <SiMongodb />,
+  <SiMongodb className="text-[#47A248]" />,
   ];
+  
   return (
     <div className='overflow-hidden w-full bg-transparent pt-22 left-0 z-0 animate-slide-In-Up-Slow'>
       <div className='flex w-max whitespace-nowrap animate-infiniteScroll'>
