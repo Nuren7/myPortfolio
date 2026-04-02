@@ -1,51 +1,82 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export default function PortfolioHero() {
-  const [active, setActive] = useState("fullstack");
+const projectsData = {
+  frontend: [
+    { name: 'Portfolio Site', link: '#' },
+    { name: 'React Blog', link: '#' },
+    { name: 'Landing Page', link: '#' },
+  ],
+  fullstack: [
+    { name: 'E-commerce', link: '#' },
+    { name: 'Chat App', link: '#' },
+    { name: 'Project Manager', link: '#' },
+  ],
+  backend: [
+    { name: 'API Server', link: '#' },
+    { name: 'Auth Service', link: '#' },
+    { name: 'Database Design', link: '#' },
+  ],
+};
 
-  const images = [
-    { key: "frontend", src: "/frontend.png" },
-    { key: "fullstack", src: "/fullstack.png" },
-    { key: "backend", src: "/backend.png" },
-  ];
-
-  const activeIndex = images.findIndex((img) => img.key === active);
+function PortfolioHero() {
+  const [activeWindow, setActiveWindow] = useState(null);
 
   return (
-    <div className="portfolioHero">
+    <div className="hero-container">
 
+      {/* ICONS */}
+      <div className="icon-sidebar">
+        <button onClick={() => setActiveWindow('frontend')} className="icon-button">
+          <img src="./frontend.png" alt="frontend" />
+          <span>Frontend</span>
+        </button>
 
-      <div className="portfolioHero-imageWrapper">
-        <div
-          className="portfolioHero-track"
-          style={{
-            transform: `translateY(-${activeIndex * 320}px)`
-          }}
-        >
-          {images.map((img) => (
-            <img
-              key={img.key}
-              src={img.src}
-              alt=""
-              className="portfolioHero-image"
-            />
-          ))}
-        </div>
+        <button onClick={() => setActiveWindow('fullstack')} className="icon-button">
+          <img src="./fullstack.png" alt="fullstack" />
+          <span>Fullstack</span>
+        </button>
+
+        <button onClick={() => setActiveWindow('backend')} className="icon-button">
+          <img src="./backend.png" alt="backend" />
+          <span>Backend</span>
+        </button>
       </div>
 
-      {/* BUTTONS */}
-      <div className="portfolioHero-buttons">
-        {images.map((img) => (
-          <div
-            key={img.key}
-            onMouseEnter={() => setActive(img.key)}
-            className={`portfolioHero-btn ${active === img.key ? "active" : ""}`}
-          >
-            {img.key}
+      {/* WINDOWS */}
+      {activeWindow && (
+        <div className="window-overlay">
+
+          <div className="retro-window">
+
+            {/* TITLE BAR */}
+            <div className="window-header">
+              <span className="window-title">
+                {activeWindow === 'frontend' && 'Frontend Projects'}
+                {activeWindow === 'fullstack' && 'Fullstack Projects'}
+                {activeWindow === 'backend' && 'Backend Projects'}
+              </span>
+
+              <div className="window-controls">
+                <button onClick={() => setActiveWindow(null)}>✕</button>
+              </div>
+            </div>
+
+            {/* CONTENT: folders */}
+            <div className="window-content folder-container">
+              {projectsData[activeWindow].map(({ name, link }) => (
+                <a href={link} key={name} className="folder-item" target="_blank" rel="noopener noreferrer">
+                  <img src="./folder_icon.png" alt="Folder Icon" />
+                  <span>{name}</span>
+                </a>
+              ))}
+            </div>
+
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
     </div>
   );
 }
+
+export default PortfolioHero;

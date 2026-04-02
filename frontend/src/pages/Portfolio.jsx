@@ -1,19 +1,15 @@
 import React from 'react'
 
 import PortfolioHero from '../components/portfolio/PortfolioHero'
-import Projects from '../components/portfolio/Projects'
-import PortfolioScroll from '../components/portfolio/PortfolioScroll'
+
 
 
 
 function Portfolio() {
   return (
-    <div className='bg-stone-300'>
+    <div className='bg-stone-300 flex '>
 
-      <PortfolioScroll />
       <PortfolioHero />
-      <Projects />
-  
 
     </div>
   )

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Logo({onClick,src,alt}) {
   return (
-    <div className='w-12 sm:w-12 md:w-16 lg:w-24'>
+    <div className='w-10 md:w-12 lg:w-14'>
     <Link onClick={onClick} className='inline-flex items-center group'>
       
       <img  
