@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const projectsData = {
   frontend: [
@@ -122,6 +123,21 @@ function PortfolioHero() {
           </div>
         </div>
       )}
+            {/* TASKBAR */}
+      <div className="animate-slide-In-Up taskbar">
+
+          {/* START BUTTON */}
+          <Link to="/" className="start-button">
+            <img src="./windows_logo.png" alt="start" />
+            <span>Start</span>
+          </Link>
+
+          {/* CLOCK */}
+          <div className="taskbar-clock">
+            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </div>
+
+        </div>
 
     </div>
   );
