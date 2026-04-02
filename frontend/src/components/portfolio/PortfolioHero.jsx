@@ -1,52 +1,146 @@
-import React, { useState } from "react";
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function PortfolioHero() {
-  const [active, setActive] = useState("fullstack");
+const projectsData = {
+  frontend: [
+    { name: 'Portfolio Site', link: '#' },
+    { name: 'React Blog', link: '#' },
+    { name: 'Landing Page', link: '#' },
+  ],
+  fullstack: [
+    { name: 'E-commerce', link: '#' },
+    { name: 'Chat App', link: '#' },
+    { name: 'Project Manager', link: '#' },
+  ],
+  backend: [
+    { name: 'API Server', link: '#' },
+    { name: 'Auth Service', link: '#' },
+    { name: 'Database Design', link: '#' },
+  ],
+};
 
-  const images = [
-    { key: "frontend", src: "/frontend.png" },
-    { key: "fullstack", src: "/fullstack.png" },
-    { key: "backend", src: "/backend.png" },
-  ];
+function PortfolioHero() {
+  const [activeWindow, setActiveWindow] = useState(null);
 
-  const activeIndex = images.findIndex((img) => img.key === active);
+  // 🔥 Drag state
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const dragging = useRef(false);
+  const offset = useRef({ x: 0, y: 0 });
+
+  const handleMouseDown = (e) => {
+    dragging.current = true;
+    offset.current = {
+      x: e.clientX - position.x,
+      y: e.clientY - position.y,
+    };
+  };
+
+  const handleMouseMove = (e) => {
+    if (!dragging.current) return;
+
+    setPosition({
+      x: e.clientX - offset.current.x,
+      y: e.clientY - offset.current.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    dragging.current = false;
+  };
 
   return (
-    <div className="portfolioHero">
+    <div 
+      className="hero-container"
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+    >
 
-      <div className="portfolioHero-imageWrapper">
-        
-        <div
-          className="portfolioHero-track"
-          style={{
-            transform: `translateY(-${activeIndex * 320}px)`
-          }}
+      {/* ICONS */}
+      <div className="icon-sidebar">
+        <button onClick={() => setActiveWindow('frontend')} className="icon-button">
+          <img src="./frontend.png" alt="frontend" />
+          <span>Frontend</span>
+        </button>
+
+        <button onClick={() => setActiveWindow('fullstack')} className="icon-button">
+          <img src="./fullstack.png" alt="fullstack" />
+          <span>Fullstack</span>
+        </button>
+
+        <button onClick={() => setActiveWindow('backend')} className="icon-button">
+          <img src="./backend.png" alt="backend" />
+          <span>Backend</span>
+        </button>
+      </div>
+
+      {/* WINDOWS */}
+      {activeWindow && (
+        <div 
+          className="window-overlay"
+          onClick={() => setActiveWindow(null)}
         >
-          {images.map((img) => (
-            <img
-              key={img.key}
-              src={img.src}
-              alt=""
-              className="portfolioHero-image"
-            />
-          ))}
-        </div>
-
-      </div>
-
-      {/* BUTTONS */}
-      <div className="portfolioHero-buttons">
-        {images.map((img) => (
-          <div
-            key={img.key}
-            onMouseEnter={() => setActive(img.key)}
-            className={`portfolioHero-btn slow-underline ${active === img.key ? "active" : ""}`}
+          <div 
+            className="retro-window"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              transform: `translate(${position.x}px, ${position.y}px)`
+            }}
           >
-            {img.key}
+
+            {/* TITLE BAR (DRAG HANDLE) */}
+            <div 
+              className="window-header"
+              onMouseDown={handleMouseDown} 
+              style={{ cursor: 'grab' }}
+            >
+              <span className="window-title">
+                {activeWindow === 'frontend' && 'Frontend Projects'}
+                {activeWindow === 'fullstack' && 'Fullstack Projects'}
+                {activeWindow === 'backend' && 'Backend Projects'}
+              </span>
+
+              <div className="window-controls">
+                <button onClick={() => setActiveWindow(null)}>✕</button>
+              </div>
+            </div>
+
+            {/* CONTENT */}
+            <div className="window-content folder-container">
+              {projectsData[activeWindow].map(({ name, link }) => (
+                <a 
+                  href={link} 
+                  key={name} 
+                  className="folder-item" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <img src="./folder_icon.png" alt="Folder Icon" />
+                  <span>{name}</span>
+                </a>
+              ))}
+            </div>
+
           </div>
-        ))}
-      </div>
+        </div>
+      )}
+            {/* TASKBAR */}
+      <div className="animate-slide-In-Up taskbar">
+
+          {/* START BUTTON */}
+          <Link to="/" className="start-button">
+            <img src="./windows_logo.png" alt="start" />
+            <span>Start</span>
+          </Link>
+
+          {/* CLOCK */}
+          <div className="taskbar-clock">
+            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </div>
+
+        </div>
 
     </div>
   );
 }
+
+export default PortfolioHero;
