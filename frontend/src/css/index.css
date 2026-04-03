@@ -1,5 +1,5 @@
 /* 1. Imports (must be first) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Outfit:wght@400;600;700&family=Style+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Outfit:wght@400;600;700&family=Style+Script&family=Pixelify+Sans:wght@400;700&display=swap');
 @import "tailwindcss";
 
 /* 2. Theme variables */
@@ -20,6 +20,7 @@
   --font-cinzel: 'Cinzel decorative';
   --font-raleway: 'Raleway';
   --font-poppins: 'Poppins';
+  --font-pixelify: 'Pixelify Sans', sans-serif;
 }
 
 /* 3. Base styles */

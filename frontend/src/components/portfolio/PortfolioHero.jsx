@@ -59,17 +59,17 @@ function PortfolioHero() {
       <div className="icon-sidebar">
         <button onClick={() => setActiveWindow('frontend')} className="icon-button">
           <img src="./frontend.png" alt="frontend" />
-          <span>Frontend</span>
+          <span className='font-pixelify font-bold'>Frontend</span>
         </button>
 
         <button onClick={() => setActiveWindow('fullstack')} className="icon-button">
           <img src="./fullstack.png" alt="fullstack" />
-          <span>Fullstack</span>
+          <span className='font-pixelify font-bold'>Fullstack</span>
         </button>
 
         <button onClick={() => setActiveWindow('backend')} className="icon-button">
           <img src="./backend.png" alt="backend" />
-          <span>Backend</span>
+          <span className='font-pixelify font-bold'>Backend</span>
         </button>
       </div>
 
@@ -99,7 +99,7 @@ function PortfolioHero() {
                 {activeWindow === 'backend' && 'Backend Projects'}
               </span>
 
-              <div className="window-controls">
+              <div className="hover:scale-110 window-controls">
                 <button onClick={() => setActiveWindow(null)}>✕</button>
               </div>
             </div>
@@ -115,7 +115,7 @@ function PortfolioHero() {
                   rel="noopener noreferrer"
                 >
                   <img src="./folder_icon.png" alt="Folder Icon" />
-                  <span>{name}</span>
+                  <span className='font-pixelify'>{name}</span>
                 </a>
               ))}
             </div>
@@ -129,11 +129,11 @@ function PortfolioHero() {
           {/* START BUTTON */}
           <Link to="/" className="start-button">
             <img src="./windows_logo.png" alt="start" />
-            <span>Start</span>
+            <span className='font-pixelify hover:scale-110'>Start</span>
           </Link>
 
           {/* CLOCK */}
-          <div className="taskbar-clock">
+          <div className="taskbar-clock font-pixelify">
             {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </div>
 
