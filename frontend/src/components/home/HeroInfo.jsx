@@ -56,7 +56,7 @@ function HeroInfo() {
   return (
     
     <div className="fixed inset-0 flex items-center justify-end px-10 text-right">
-      <h1 className="hero-title font-montserrat text-stone-500">
+      <h1 className="hero-title text-stone-500">
         {text}
         <span className="hero-title animate-blink">|</span> 
       </h1>

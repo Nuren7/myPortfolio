@@ -1,28 +1,35 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const projectsData = {
-  frontend: [
-    { name: 'Portfolio Site', link: '#' },
-    { name: 'React Blog', link: '#' },
-    { name: 'Landing Page', link: '#' },
-  ],
-  fullstack: [
-    { name: 'E-commerce', link: '#' },
-    { name: 'Chat App', link: '#' },
-    { name: 'Project Manager', link: '#' },
-  ],
-  backend: [
-    { name: 'API Server', link: '#' },
-    { name: 'Auth Service', link: '#' },
-    { name: 'Database Design', link: '#' },
-  ],
-};
-
 function PortfolioHero() {
+  /* backend */
+  const [projects, setProjects] = useState({});
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const res = await fetch("http://localhost:3000/api/projects");
+      const data = await res.json();
+
+      const grouped = {
+        frontend: [],
+        fullstack: [],
+        backend: []
+      }
+      data.forEach(project => {
+        if (grouped[project.type]) {
+          grouped[project.type].push(project);
+        }
+      });
+      setProjects(grouped);
+    };
+    fetchProjects();
+  }, []);
+
+
+
   const [activeWindow, setActiveWindow] = useState(null);
 
-  // 🔥 Drag state
+ 
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
@@ -59,17 +66,17 @@ function PortfolioHero() {
       <div className="icon-sidebar">
         <button onClick={() => setActiveWindow('frontend')} className="icon-button">
           <img src="./frontend.png" alt="frontend" />
-          <span>Frontend</span>
+          <span className='font-pixelify font-bold'>Frontend</span>
         </button>
 
         <button onClick={() => setActiveWindow('fullstack')} className="icon-button">
           <img src="./fullstack.png" alt="fullstack" />
-          <span>Fullstack</span>
+          <span className='font-pixelify font-bold'>Fullstack</span>
         </button>
 
         <button onClick={() => setActiveWindow('backend')} className="icon-button">
           <img src="./backend.png" alt="backend" />
-          <span>Backend</span>
+          <span className='font-pixelify font-bold'>Backend</span>
         </button>
       </div>
 
@@ -99,14 +106,15 @@ function PortfolioHero() {
                 {activeWindow === 'backend' && 'Backend Projects'}
               </span>
 
-              <div className="window-controls">
+              <div className="hover:scale-110 window-controls">
                 <button onClick={() => setActiveWindow(null)}>✕</button>
               </div>
             </div>
 
             {/* CONTENT */}
+            {projects && activeWindow && (
             <div className="window-content folder-container">
-              {projectsData[activeWindow].map(({ name, link }) => (
+              {projects[activeWindow]?.map(({ name, link }) => (
                 <a 
                   href={link} 
                   key={name} 
@@ -115,10 +123,12 @@ function PortfolioHero() {
                   rel="noopener noreferrer"
                 >
                   <img src="./folder_icon.png" alt="Folder Icon" />
-                  <span>{name}</span>
+                  <span className='font-pixelify'>{name}</span>
                 </a>
               ))}
+             
             </div>
+            )}
 
           </div>
         </div>
@@ -129,11 +139,11 @@ function PortfolioHero() {
           {/* START BUTTON */}
           <Link to="/" className="start-button">
             <img src="./windows_logo.png" alt="start" />
-            <span>Start</span>
+            <span className='font-pixelify hover:scale-110'>Start</span>
           </Link>
 
           {/* CLOCK */}
-          <div className="taskbar-clock">
+          <div className="taskbar-clock font-pixelify">
             {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </div>
 
