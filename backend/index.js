@@ -5,26 +5,25 @@ const app = express()
 const cors = require("cors")
 app.use(cors())
 
-const projectsData = {
-  frontend: [
-    { name: 'Portfolio Site', link: '#' },
-    { name: 'React Blog', link: '#' },
-    { name: 'Landing Page', link: '#' },
-  ],
-  fullstack: [
-    { name: 'E-commerce', link: '#' },
-    { name: 'Chat App', link: '#' },
-    { name: 'Project Manager', link: '#' },
-  ],
-  backend: [
-    { name: 'API Server', link: '#' },
-    { name: 'Auth Service', link: '#' },
-    { name: 'Database Design', link: '#' },
-  ],
-};
+const { Pool } = require("pg")
 
-app.get("/api/projects", (req, res) => {
-  res.json(projectsData)
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "myPortfolio",
+  password: "karina127",
+  port: 5432,
+})
+
+
+app.get("/api/projects", async (req, res) => {
+  try {
+  const result = await pool.query("SELECT * FROM projects") 
+  res.json(result.rows) 
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: "Server Error" })
+  }
 })
 
 app.listen(3000, () => {
