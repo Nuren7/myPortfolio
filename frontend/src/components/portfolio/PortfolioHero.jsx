@@ -1,28 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const projectsData = {
-  frontend: [
-    { name: 'Portfolio Site', link: '#' },
-    { name: 'React Blog', link: '#' },
-    { name: 'Landing Page', link: '#' },
-  ],
-  fullstack: [
-    { name: 'E-commerce', link: '#' },
-    { name: 'Chat App', link: '#' },
-    { name: 'Project Manager', link: '#' },
-  ],
-  backend: [
-    { name: 'API Server', link: '#' },
-    { name: 'Auth Service', link: '#' },
-    { name: 'Database Design', link: '#' },
-  ],
-};
-
 function PortfolioHero() {
+  /* backend */
+  const [projects, setProjects] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const res = await fetch("http://localhost:3000/api/projects");
+      const data = await res.json();
+      setProjects(data);
+    };
+    fetchProjects();
+  }, []);
+
+
+
   const [activeWindow, setActiveWindow] = useState(null);
 
-  // 🔥 Drag state
+ 
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
@@ -105,8 +101,9 @@ function PortfolioHero() {
             </div>
 
             {/* CONTENT */}
+            {projects && activeWindow && (
             <div className="window-content folder-container">
-              {projectsData[activeWindow].map(({ name, link }) => (
+              {projects[activeWindow]?.map(({ name, link }) => (
                 <a 
                   href={link} 
                   key={name} 
@@ -118,7 +115,9 @@ function PortfolioHero() {
                   <span className='font-pixelify'>{name}</span>
                 </a>
               ))}
+             
             </div>
+            )}
 
           </div>
         </div>
