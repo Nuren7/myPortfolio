@@ -2,6 +2,9 @@ const express = require("express")
 
 const app = express()
 
+const cors = require("cors")
+app.use(cors())
+
 const projectsData = {
   frontend: [
     { name: 'Portfolio Site', link: '#' },
@@ -20,7 +23,7 @@ const projectsData = {
   ],
 };
 
-app.get("http://localhost:3000/api/projects", (req, res) => {
+app.get("/api/projects", (req, res) => {
   res.json(projectsData)
 })
 
