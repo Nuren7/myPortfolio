@@ -1,17 +1,17 @@
 import React from 'react'
 
-/* import PortfolioCard from '../components/portfolio/PortfolioCard' */
 import PortfolioHero from '../components/portfolio/PortfolioHero'
-import Projects from '../components/portfolio/Projects'
+import PortfolioInfo from '../components/portfolio/PortfolioInfo'
+
+
 
 
 function Portfolio() {
   return (
-    <div className='bg-stone-300'>
+    <div className='bg-stone-300 flex '>
 
+      <PortfolioInfo />
       <PortfolioHero />
-      <Projects />
-  
 
     </div>
   )

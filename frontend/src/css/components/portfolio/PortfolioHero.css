@@ -1,129 +1,280 @@
 @import "tailwindcss";
 
-/* ROOT CONTAINER */
-.portfolioHero {
+/* BACKGROUND */
+.hero-container {
   height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  width: 100%;
+
+  background-image: url('./windows_logo.png');
+  background-size: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+
   position: relative;
-  overflow: hidden;
-  padding-bottom: 100px;
 }
 
-.portfolioHero-imageWrapper {
+/* Info */
+.portfolio-info {
   position: absolute;
-  bottom: 190px;
-  left: 50%;
-  transform: translateX(-45%);
-  width: 240px;
-  height: 320px;
-  overflow: hidden; 
-  z-index: 30;
+  top: 24%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+
+  font-size: clamp(1rem, 1.5vw, 3rem); 
+  font-family: var(--font-pixelify);
+
 }
 
-/* TRACK */
-.portfolioHero-track {
+/* ICONS */
+.icon-sidebar {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: 20px;
 }
 
-/* IMAGE */
-.portfolioHero-image {
-  width: 240px;
-  height: 320px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-/* BUTTON WRAPPER */
-.portfolioHero-buttons {
-  position: relative;
-  z-index: 40;
+.icon-button {
+  width: 80px;
   display: flex;
-  gap: 120px;
-  font-size: 35px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* BUTTON */
-.portfolioHero-btn {
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
   cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
 }
 
-
-/* HOVER BOX EFFECT */
-.portfolioHero-btn {
-  position: relative;
-  display: block;
-  padding: 10px 20px;
-  z-index: 1;
-  transition: color 0.3s ease;
+/* Hover */
+.icon-button:hover {
+  scale: 1.1;
 }
 
-.portfolioHero-btn::before {
-  content: "";
-  position: absolute;
+.icon-button img {
+  width: 50px;
+}
+
+.icon-button span {
+  font-size: 12px;
+  color: black;
+}
+
+/* WINDOW OVERLAY */
+.window-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border-top: 2px solid rgba(255, 255, 255, 0.85);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.85);
-  transform: scaleY(2);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 49;
 }
 
-.portfolioHero-btn::after {
-  content: "";
-  position: absolute;
-  top: 2px;
+/* RETRO WINDOW */
+.retro-window {
+  width: 700px;
+  max-width: 95vw;
+  height: 400px;
+  max-height: 90vh;
+  background: #c0c0c0;
+  border: 2px solid black;
+  box-shadow: 5px 5px 0px #808080;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.window-header {
+  background: #000080;
+  color: white;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.window-title {
+  font-weight: bold;
+}
+
+/* CONTROLS */
+.window-controls button {
+  background: #c0c0c0;
+  border: 1px solid black;
+  margin-left: 5px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* CONTENT */
+.window-content {
+  flex: 1;
+  background: #ffffff;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* Folder container */
+.folder-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+
+  align-items: flex-start; 
+}
+
+/* Folder item */
+.folder-item {
+  display: inline-flex; 
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Folder icon */
+.folder-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Hover */
+.folder-item:hover {
+  scale: 1.1;
+}
+/* TASKBAR */
+.taskbar {
+  position: fixed;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: calc(100% - 4px);
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  z-index: -1;
-  pointer-events: none;
+
+  height: 40px;
+  background: #c0c0c0;
+
+  border-top: 2px solid #fff;
+  box-shadow: inset 0 1px #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 8px;
+  z-index: 49;
 }
 
-.portfolioHero-btn:hover::before,
-.portfolioHero-btn.active::before {
-  transform: scaleY(1);
-  opacity: 1;
+/* START BUTTON */
+.start-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #c0c0c0;
+  border: 2px outset #fff;
+
+  padding: 4px 10px;
+  cursor: pointer;
 }
 
-.portfolioHero-btn:hover::after,
-.portfolioHero-btn.active::after {
-  transform: scale(1);
-  opacity: 1;
+.start-button:active {
+  border: 2px inset #808080;
 }
 
-.portfolioHero-btn:hover,
-.portfolioHero-btn.active {
-  color: #fff;
+.start-button img {
+  width: 18px;
+  height: 18px;
 }
 
-/* TEXT SLOT-IN EFFECT */
-.portfolioHero-btn {
-  display: block;
-  transform: translateY(0);
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.28s ease;
-  will-change: transform;
+.start-button span {
+  font-weight: bold;
+  font-size: 14px;
 }
 
-.portfolioHero-btn:hover,
-.portfolioHero-btn.active {
-  transform: translateY(6px);
-  color: #fff;
+/* TASKBAR WINDOWS */
+.taskbar-windows {
+  display: flex;
+  flex: 1;
+  margin: 0 10px;
+  gap: 5px;
+}
+
+.taskbar-item {
+  background: #c0c0c0;
+  border: 2px inset #808080;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+/* CLOCK */
+.taskbar-clock {
+  background: #c0c0c0;
+  border: 2px inset #808080;
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .retro-window {
+    width: 90vw;
+    height: 400px;
+  }
+
+  .folder-item img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .folder-container {
+    gap: 12px;
+    padding: 12px;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  .icon-sidebar {
+    bottom: 50px;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+  }
+
+  .retro-window {
+    width: 95vw;
+    height: 350px;
+  }
+
+  .window-content {
+    min-height: 150px;
+    padding: 15px;
+  }
+
+  .folder-item img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .folder-container {
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
 }

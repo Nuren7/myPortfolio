@@ -6,11 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 import "./css/Index.css"
 import "./css/components/navbar/Navbar.css"
 import "./css/components/WelcomeLoader.css"
-import "./css/components/portfolio/Portfolio.css"
 import "./css/components/portfolio/PortfolioHero.css"
 import "./css/components/Home/Hero.css"
-
-import "./css/components/Goldstyles.css"
 
 
 import "./css/animations/Fade.css"

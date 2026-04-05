@@ -4,14 +4,13 @@ import { useState, useEffect } from "react"
 function HeroInfo() {
   const words = [
     "Hi, I'm Nuren a FullStack Developer",
-    "Here are some of my passions",
-    "Frontend Developing",
-    "React JSX TailwindCSS",
-    "Backend Developing",
-    "Node.js Express MongoDB",
-    "AWS SQL NoSQL",
-    "Cybersecurity",
-    "Ethical Hacking Penetration Testing Kali Linux"
+    "Here are some of my talents",
+    "Fullstack",
+    "React Angular Vue",
+    "Node.js Java Python Ruby",
+    "MySQL PostgreSQL NoSQL MongoDB",
+    "DevOps & Cloud",
+    "CI/CD pipelines Git/Lab/Hub Docker AWS Heroku"
   ]
 
 
@@ -57,7 +56,7 @@ function HeroInfo() {
   return (
     
     <div className="fixed inset-0 flex items-center justify-end px-10 text-right">
-      <h1 className="hero-title font-montserrat text-stone-500">
+      <h1 className="hero-title text-stone-500">
         {text}
         <span className="hero-title animate-blink">|</span> 
       </h1>
