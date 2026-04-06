@@ -6,6 +6,7 @@ import PortfolioInfo from '../components/portfolio/PortfolioInfo'
 
 
 
+
 function Portfolio() {
   return (
     <div className='bg-stone-300 flex '>

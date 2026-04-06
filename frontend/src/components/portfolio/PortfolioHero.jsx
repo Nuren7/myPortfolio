@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 
 function PortfolioHero() {
 
-  // ---------------- STATE ----------------
   const [projects, setProjects] = useState({});
   const [activeWindow, setActiveWindow] = useState(null);
 
   const [password, setPassword] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+ const [isAuthenticated, setIsAuthenticated] = useState(
+  !!localStorage.getItem("token")
+  );
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const dragging = useRef(false);
   const offset = useRef({ x: 0, y: 0 });
 
-  // ---------------- FETCH ----------------
+ /* FETCH */
   useEffect(() => {
     const fetchProjects = async () => {
       const res = await fetch("http://localhost:3000/api/projects");
@@ -39,7 +40,7 @@ function PortfolioHero() {
     fetchProjects();
   }, []);
 
-  // ---------------- DRAG ----------------
+/* DRAG */
   const handleMouseDown = (e) => {
     dragging.current = true;
     offset.current = {
@@ -61,7 +62,7 @@ function PortfolioHero() {
     dragging.current = false;
   };
 
-  // ---------------- LOGIN (frontend only for now) ----------------
+/* Login */
   const handleLogin = async () => {
     const res = await fetch("http://localhost:3000/api/admin-login", {
       method: "POST",
@@ -74,6 +75,7 @@ function PortfolioHero() {
     const data = await res.json();
 
     if (data.success) {
+      localStorage.setItem('token', data.token);
       setIsAuthenticated(true);
       setActiveWindow(null); 
     } else {
@@ -81,7 +83,7 @@ function PortfolioHero() {
     }
   };
 
-  // ---------------- UI ----------------
+  /* UI */
   return (
     <div
       className="hero-container"
@@ -140,9 +142,17 @@ function PortfolioHero() {
                   ? 'Admin Panel'
                   : `${activeWindow} Projects`}
               </span>
-
-              <div className="hover:scale-110 window-controls">
-                <button onClick={() => setActiveWindow(null)}>✕</button>
+              
+              <div className="flex items-center gap-2">
+                {/* ADMIN CONTROLS */}
+                  {isAuthenticated && (
+                  <div className='hover:scale-110 window-controls'>
+                    <Link to="/admin">🔐</Link>
+                  </div>
+                )}
+                <div className="hover:scale-110 window-controls">
+                  <button onClick={() => setActiveWindow(null)}>✕</button>
+                </div>
               </div>
 
             </div>
@@ -165,8 +175,8 @@ function PortfolioHero() {
                     </>
                   ) : (
                     <div>
-                      <p>Welcome Admin ✅</p>
-                      <p>Now you can edit/add/delete projects (next step)</p>
+                      <p>Welcome Admin </p>
+                      <p>Press 🔐 to edit, delete and add projects </p>
                     </div>
                   )}
                 </div>
@@ -183,11 +193,6 @@ function PortfolioHero() {
                     >
                       <img src="./folder_icon.png" alt="Folder" />
                       <span>{name}</span>
-
-                      {/* ADMIN CONTROLS */}
-                      {isAuthenticated && (
-                        <button>Delete</button> // we'll fix later
-                      )}
                     </a>
                   ))}
                 </div>
@@ -199,7 +204,7 @@ function PortfolioHero() {
       )}
 
       {/* TASKBAR */}
-      <div className="taskbar">
+      <div className="taskbar animate-slide-In-Up">
         <Link to="/" className="start-button">
           <img src="./windows_logo.png" alt="start" />
           <span>Start</span>
