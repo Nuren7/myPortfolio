@@ -2,9 +2,20 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function PortfolioHero() {
-  /* backend */
-  const [projects, setProjects] = useState({});
 
+  // ---------------- STATE ----------------
+  const [projects, setProjects] = useState({});
+  const [activeWindow, setActiveWindow] = useState(null);
+
+  const [password, setPassword] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const dragging = useRef(false);
+  const offset = useRef({ x: 0, y: 0 });
+
+  // ---------------- FETCH ----------------
   useEffect(() => {
     const fetchProjects = async () => {
       const res = await fetch("http://localhost:3000/api/projects");
@@ -14,26 +25,21 @@ function PortfolioHero() {
         frontend: [],
         fullstack: [],
         backend: []
-      }
+      };
+
       data.forEach(project => {
         if (grouped[project.type]) {
           grouped[project.type].push(project);
         }
       });
+
       setProjects(grouped);
     };
+
     fetchProjects();
   }, []);
 
-
-
-  const [activeWindow, setActiveWindow] = useState(null);
-
- 
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const dragging = useRef(false);
-  const offset = useRef({ x: 0, y: 0 });
-
+  // ---------------- DRAG ----------------
   const handleMouseDown = (e) => {
     dragging.current = true;
     offset.current = {
@@ -55,8 +61,29 @@ function PortfolioHero() {
     dragging.current = false;
   };
 
+  // ---------------- LOGIN (frontend only for now) ----------------
+  const handleLogin = async () => {
+    const res = await fetch("http://localhost:3000/api/admin-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ password })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setIsAuthenticated(true);
+      setActiveWindow(null); 
+    } else {
+      alert("Wrong password");
+    }
+  };
+
+  // ---------------- UI ----------------
   return (
-    <div 
+    <div
       className="hero-container"
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -80,13 +107,22 @@ function PortfolioHero() {
         </button>
       </div>
 
-      {/* WINDOWS */}
+      {/* ADMIN BUTTON */}
+      <button
+        onClick={() => setActiveWindow('admin')}
+        className="admin-icon-button"
+      >
+        <img src="./admin.png" alt="admin" />
+        <span className='font-pixelify font-bold'>Admin</span>
+      </button>
+
+      {/* WINDOW */}
       {activeWindow && (
-        <div 
+        <div
           className="window-overlay"
           onClick={() => setActiveWindow(null)}
         >
-          <div 
+          <div
             className="retro-window"
             onClick={(e) => e.stopPropagation()}
             style={{
@@ -94,60 +130,88 @@ function PortfolioHero() {
             }}
           >
 
-            {/* TITLE BAR (DRAG HANDLE) */}
-            <div 
+            {/* HEADER */}
+            <div
               className="window-header"
-              onMouseDown={handleMouseDown} 
-              style={{ cursor: 'grab' }}
+              onMouseDown={handleMouseDown}
             >
-              <span className="window-title">
-                {activeWindow === 'frontend' && 'Frontend Projects'}
-                {activeWindow === 'fullstack' && 'Fullstack Projects'}
-                {activeWindow === 'backend' && 'Backend Projects'}
+              <span>
+                {activeWindow === 'admin'
+                  ? 'Admin Panel'
+                  : `${activeWindow} Projects`}
               </span>
 
               <div className="hover:scale-110 window-controls">
                 <button onClick={() => setActiveWindow(null)}>✕</button>
               </div>
+
             </div>
 
             {/* CONTENT */}
-            {projects && activeWindow && (
-            <div className="window-content folder-container">
-              {projects[activeWindow]?.map(({ name, link }) => (
-                <a 
-                  href={link} 
-                  key={name} 
-                  className="folder-item" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <img src="./folder_icon.png" alt="Folder Icon" />
-                  <span className='font-pixelify'>{name}</span>
-                </a>
-              ))}
-             
-            </div>
-            )}
+            <div className="window-content">
 
+              {/* ADMIN VIEW */}
+              {activeWindow === 'admin' ? (
+                <div>
+                  {!isAuthenticated ? (
+                    <>
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                      />
+                      <button onClick={handleLogin}>Login</button>
+                    </>
+                  ) : (
+                    <div>
+                      <p>Welcome Admin ✅</p>
+                      <p>Now you can edit/add/delete projects (next step)</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* PROJECTS VIEW */
+                <div className="folder-container">
+                  {projects[activeWindow]?.map(({ name, link }) => (
+                    <a
+                      href={link}
+                      key={name}
+                      className="folder-item"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img src="./folder_icon.png" alt="Folder" />
+                      <span>{name}</span>
+
+                      {/* ADMIN CONTROLS */}
+                      {isAuthenticated && (
+                        <button>Delete</button> // we'll fix later
+                      )}
+                    </a>
+                  ))}
+                </div>
+              )}
+
+            </div>
           </div>
         </div>
       )}
-            {/* TASKBAR */}
-      <div className="animate-slide-In-Up taskbar">
 
-          {/* START BUTTON */}
-          <Link to="/" className="start-button">
-            <img src="./windows_logo.png" alt="start" />
-            <span className='font-pixelify hover:scale-110'>Start</span>
-          </Link>
+      {/* TASKBAR */}
+      <div className="taskbar">
+        <Link to="/" className="start-button">
+          <img src="./windows_logo.png" alt="start" />
+          <span>Start</span>
+        </Link>
 
-          {/* CLOCK */}
-          <div className="taskbar-clock font-pixelify">
-            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </div>
-
+        <div className="taskbar-clock">
+          {new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
         </div>
+      </div>
 
     </div>
   );

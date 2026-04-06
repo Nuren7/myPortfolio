@@ -37,6 +37,21 @@
   gap: 20px;
 }
 
+.admin-icon-button {
+  position: fixed;      
+  top: 70px;             
+  right: 20px;           
+
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  background: transparent;
+  cursor: pointer;         
+}
+
 .icon-button {
   width: 80px;
   display: flex;
@@ -52,11 +67,23 @@
   scale: 1.1;
 }
 
+.admin-icon-button:hover {
+  scale: 1.1;
+}
+
 .icon-button img {
   width: 50px;
 }
 
 .icon-button span {
+  font-size: 12px;
+  color: black;
+}
+.admin-icon-button img {
+  width: 50px;
+}
+
+.admin-icon-button span {
   font-size: 12px;
   color: black;
 }
@@ -276,5 +303,16 @@
     justify-content: center;
     gap: 10px;
     padding: 10px;
+  }
+   .admin-icon-button {
+    top: 50px;
+    right: 10px;
+    width: 60px;
+  }
+    .admin-icon-button img {
+    width: 40px;
+  }
+  .admin-icon-button span {
+    font-size: 10px;
   }
 }
