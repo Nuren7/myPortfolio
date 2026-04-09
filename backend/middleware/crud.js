@@ -41,7 +41,6 @@ app.post("/api/admin-login", async (req, res) => {
     adminToken = token;
 
     res.json({ success: true, token });
-
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });
@@ -62,6 +61,10 @@ const checkAdmin = (req, res, next) => {
 
   next();
 };
+
+app.get("/api/admin-check", checkAdmin, async (req, res) => {
+  res.json({ success: true });
+});
 
 /* ---------------- GET ---------------- */
 
@@ -87,11 +90,10 @@ app.post("/api/projects", checkAdmin, async (req, res) => {
 
     const result = await pool.query(
       "INSERT INTO projects (name, link, description, type) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, link, description, type]
+      [name, link, description, type],
     );
 
     res.json(result.rows[0]);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });
@@ -111,11 +113,10 @@ app.put("/api/projects/:id", checkAdmin, async (req, res) => {
 
     const result = await pool.query(
       "UPDATE projects SET name=$1, link=$2, description=$3, type=$4 WHERE id=$5 RETURNING *",
-      [name, link, description, type, id]
+      [name, link, description, type, id],
     );
 
     res.json(result.rows[0]);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });
@@ -131,7 +132,6 @@ app.delete("/api/projects/:id", checkAdmin, async (req, res) => {
     await pool.query("DELETE FROM projects WHERE id=$1", [id]);
 
     res.json({ success: true });
-
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });

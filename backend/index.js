@@ -1,16 +1,14 @@
 let adminToken = null;
 
-const express = require("express")
-
-const app = express()
+const express = require("express");
+const app = express();
 
 const bcrypt = require("bcrypt");
+const cors = require("cors");
+const { Pool } = require("pg");
+
 app.use(express.json());
-
-const cors = require("cors")
-app.use(cors())
-
-const { Pool } = require("pg")
+app.use(cors());
 
 const pool = new Pool({
   user: "postgres",
@@ -18,9 +16,10 @@ const pool = new Pool({
   database: "myPortfolio",
   password: "karina127",
   port: 5432,
-})
+});
 
-/* Post */
+/* ---------------- AUTH ---------------- */
+
 app.post("/api/admin-login", async (req, res) => {
   try {
     const { password } = req.body;
@@ -32,47 +31,115 @@ app.post("/api/admin-login", async (req, res) => {
     }
 
     const admin = result.rows[0];
-
     const isMatch = await bcrypt.compare(password, admin.password);
 
     if (!isMatch) {
       return res.json({ success: false });
     }
-  const token = Math.random ().toString(36).substr(2);
 
-  adminToken = token;
+    const token = Math.random().toString(36).substr(2);
+    adminToken = token;
 
-  res.json({ success: true, token });
-
+    res.json({ success: true, token });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-/* GET */
+/* ---------------- MIDDLEWARE ---------------- */
+
+const checkAdmin = (req, res, next) => {
+  const token = req.headers.authorization;
+
+  console.log("Frontend token:", token);
+  console.log("Server token:", adminToken);
+
+  if (token !== adminToken) {
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+
+  next();
+};
+
+app.get("/api/admin-check", checkAdmin, async (req, res) => {
+  res.json({ success: true });
+});
+
+/* ---------------- GET ---------------- */
 
 app.get("/api/projects", async (req, res) => {
   try {
-  const result = await pool.query("SELECT * FROM projects") 
-  res.json(result.rows) 
+    const result = await pool.query("SELECT * FROM projects ORDER BY id DESC");
+    res.json(result.rows);
   } catch (err) {
-    console.error(err.message)
-    res.status(500).json({ error: "Server Error" })
+    console.error(err.message);
+    res.status(500).json({ error: "Server Error" });
   }
-})
+});
 
-app.get("/api/admin-check", async (req, res) => {
-  const token = req.headers.authorization;
+/* ---------------- CREATE ---------------- */
 
-  if (token !== adminToken) {
-    return res.status(403).json({ success: false });
+app.post("/api/projects", checkAdmin, async (req, res) => {
+  try {
+    const { name, link, description, type } = req.body;
+
+    if (!name || !link || !description || !type) {
+      return res.status(400).json({ error: "All fields required" });
+    }
+
+    const result = await pool.query(
+      "INSERT INTO projects (name, link, description, type) VALUES ($1, $2, $3, $4) RETURNING *",
+      [name, link, description, type],
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
   }
+});
+
+/* ---------------- UPDATE ---------------- */
+
+app.put("/api/projects/:id", checkAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, link, description, type } = req.body;
+
+    if (!name || !link || !description || !type) {
+      return res.status(400).json({ error: "All fields required" });
+    }
+
+    const result = await pool.query(
+      "UPDATE projects SET name=$1, link=$2, description=$3, type=$4 WHERE id=$5 RETURNING *",
+      [name, link, description, type, id],
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+/* ---------------- DELETE ---------------- */
+
+app.delete("/api/projects/:id", checkAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await pool.query("DELETE FROM projects WHERE id=$1", [id]);
 
     res.json({ success: true });
-})
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
+/* ---------------- SERVER ---------------- */
 
 app.listen(3000, () => {
-  console.log("Server running on port 3000")
-})
+  console.log("Server running on port 3000");
+});

@@ -84,36 +84,36 @@ function Admin() {
   /* SAVE (ADD OR EDIT) */
   const handleSave = async () => {
     try {
-      if (isAdding) {
-        await fetch("http://localhost:3000/api/projects", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-          body: JSON.stringify(formData),
-        });
-      } else {
-        await fetch(
-          `http://localhost:3000/api/projects/${activeProject.id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: token,
-            },
-            body: JSON.stringify(formData),
-          }
-        );
+      const url = isAdding
+        ? "http://localhost:3000/api/projects"
+        : `http://localhost:3000/api/projects/${activeProject.id}`;
+      const method = isAdding ? "POST" : "PUT";
+
+      const res = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Save failed:", data);
+        alert(data.error || "Save failed");
+        return;
       }
 
       setShowModal(false);
       setFormData(emptyProject);
       setActiveProject(null);
 
-      fetchProjects(); 
+      fetchProjects();
     } catch (err) {
       console.error("Save error:", err);
+      alert("Unable to save project. Check console for details.");
     }
   };
 
@@ -123,16 +123,25 @@ function Admin() {
     if (!confirmDelete) return;
 
     try {
-      await fetch(`http://localhost:3000/api/projects/${id}`, {
+      const res = await fetch(`http://localhost:3000/api/projects/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: token,
         },
       });
 
-      fetchProjects(); 
+      const data = await res.json();
+
+      if (!res.ok) {
+        console.error("Delete failed:", data);
+        alert(data.error || "Delete failed");
+        return;
+      }
+
+      fetchProjects();
     } catch (err) {
       console.error("Delete error:", err);
+      alert("Unable to delete project. Check console for details.");
     }
   };
 
