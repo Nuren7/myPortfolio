@@ -1,0 +1,115 @@
+.admin-container {
+  height: auto;
+  width: 100%;
+
+  padding: 20px;
+  padding-top: 70px;
+  font-family: var(--font-pixelify);
+}
+
+/* HEADER */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* ROW */
+.project-row {
+  margin-bottom: 30px;
+}
+
+.row-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+/* ROW CONTENT */
+.row-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* PROJECT CARD */
+.project-card {
+  position: relative;
+  width: 80px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.project-card img {
+  width: 40px;
+}
+
+.project-card span {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ACTIONS */
+.actions {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+
+  display: flex;
+  gap: 3px;
+}
+
+.actions button {
+  font-size: 12px;
+  border: 1px solid black;
+  background: #c0c0c0;
+  cursor: pointer;
+}
+
+/* MODAL FORM */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+  border: 1px solid black;
+  padding: 5px;
+  font-family: inherit;
+}
+
+/* BUTTONS */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .row-content {
+    justify-content: center;
+  }
+
+  .project-card {
+    width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-form input,
+  .modal-form textarea {
+    font-size: 12px;
+  }
+}

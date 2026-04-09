@@ -8,6 +8,8 @@ import Navbar from './components/navbar/Navbar'
 import Contact from './pages/Contact'
 import Portfolio from './pages/Portfolio'
 import About from './pages/About'
+import Admin from './components/portfolio/Admin'
+import ProtectedRoute from './components/portfolio/ProtectedRoute';
 
 function App() {
   return (
@@ -20,6 +22,11 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/about" element={<About />} />
+        <Route path="/admin" element={
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        } />
       </Routes>
     
     </>
