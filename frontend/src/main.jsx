@@ -7,6 +7,7 @@ import "./css/Index.css"
 import "./css/components/navbar/Navbar.css"
 import "./css/components/WelcomeLoader.css"
 import "./css/components/portfolio/PortfolioHero.css"
+import "./css/components/portfolio/Admin.css"
 import "./css/components/Home/Hero.css"
 
 

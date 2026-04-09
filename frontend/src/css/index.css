@@ -1,8 +1,8 @@
-/* 1. Imports (must be first) */
+/*Imports (must be first) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Outfit:wght@400;600;700&family=Style+Script&family=Pixelify+Sans:wght@400;700&display=swap');
 @import "tailwindcss";
 
-/* 2. Theme variables */
+/* Theme variables */
 @theme {
   --breakpoint-xxxs: 20rem;
   --breakpoint-xxs: 23rem;
@@ -23,7 +23,7 @@
   --font-pixelify: 'Pixelify Sans', sans-serif;
 }
 
-/* 3. Base styles */
+/*Base styles */
 @layer base {
 
   html {
@@ -47,7 +47,7 @@
   }
 }
 
-/* 4. Global utilities */
+/* Global utilities */
 
 .slow-underline {
   position: relative;
