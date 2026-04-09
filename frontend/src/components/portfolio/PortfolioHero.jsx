@@ -40,6 +40,34 @@ function PortfolioHero() {
     fetchProjects();
   }, []);
 
+  useEffect(() => {
+  const verifyAuth = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setIsAuthenticated(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:3000/api/admin-check", {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      const data = await res.json();
+
+      setIsAuthenticated(data.success);
+    } catch (err) {
+      console.error(err);
+      setIsAuthenticated(false);
+    }
+  };
+
+  verifyAuth();
+}, []);
+
 /* DRAG */
   const handleMouseDown = (e) => {
     dragging.current = true;
