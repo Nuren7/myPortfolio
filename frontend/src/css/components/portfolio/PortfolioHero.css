@@ -52,6 +52,21 @@
   cursor: pointer;         
 }
 
+.token-icon-button {
+  position: fixed;      
+  top: 150px;             
+  right: 25px;           
+
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  background: transparent;
+  cursor: pointer;         
+}
+
 .icon-button {
   width: 80px;
   display: flex;
@@ -71,6 +86,11 @@
   scale: 1.1;
 }
 
+.token-icon-button:hover {
+  scale: 1.1;
+}
+
+/* icon box */
 .icon-button img {
   width: 50px;
 }
@@ -84,6 +104,15 @@
 }
 
 .admin-icon-button span {
+  font-size: 12px;
+  color: black;
+}
+
+.token-icon-button img {
+  width: 50px;
+}
+
+.token-icon-button span {
   font-size: 12px;
   color: black;
 }
@@ -304,15 +333,15 @@
     gap: 10px;
     padding: 10px;
   }
-   .admin-icon-button {
+  .token-icon-button .admin-icon-button {
     top: 50px;
     right: 10px;
     width: 60px;
   }
-    .admin-icon-button img {
+   .token-icon-button .admin-icon-button img {
     width: 40px;
   }
-  .admin-icon-button span {
+ .token-icon-button .admin-icon-button span {
     font-size: 10px;
   }
 }

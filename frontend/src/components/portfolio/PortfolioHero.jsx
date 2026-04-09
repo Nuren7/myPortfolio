@@ -6,7 +6,7 @@ function PortfolioHero() {
   const [projects, setProjects] = useState({});
   const [activeWindow, setActiveWindow] = useState(null);
 
-  const [password, setPassword] = useState("");
+ const [password, setPassword] = useState("");
  const [isAuthenticated, setIsAuthenticated] = useState(
   !!localStorage.getItem("token")
   );
@@ -77,11 +77,19 @@ function PortfolioHero() {
     if (data.success) {
       localStorage.setItem('token', data.token);
       setIsAuthenticated(true);
-      setActiveWindow(null); 
+      setPassword("");
     } else {
-      alert("Wrong password");
+      alert("Wrong password")
+      setPassword("");
     }
   };
+
+  /* Logout */
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setActiveWindow(null);
+  }
 
   /* UI */
   return (
@@ -112,11 +120,20 @@ function PortfolioHero() {
       {/* ADMIN BUTTON */}
       <button
         onClick={() => setActiveWindow('admin')}
-        className="admin-icon-button"
-      >
+        className="admin-icon-button">
         <img src="./admin.png" alt="admin" />
-        <span className='font-pixelify font-bold'>Admin</span>
+          <span className='font-pixelify font-bold'>Admin</span>
       </button>
+
+      {/* ADMIN CONTROLS */}
+        {isAuthenticated && (
+          <Link 
+          to="/admin"
+           className='token-icon-button'>
+            <img src="./token.png" alt="token" />
+              <span className='font-pixelify font-bold'>Token</span>
+          </Link>
+        )}
 
       {/* WINDOW */}
       {activeWindow && (
@@ -139,17 +156,11 @@ function PortfolioHero() {
             >
               <span>
                 {activeWindow === 'admin'
-                  ? 'Admin Panel'
+                  ? 'Admin Login'
                   : `${activeWindow} Projects`}
               </span>
               
               <div className="flex items-center gap-2">
-                {/* ADMIN CONTROLS */}
-                  {isAuthenticated && (
-                  <div className='hover:scale-110 window-controls'>
-                    <Link to="/admin">🔐</Link>
-                  </div>
-                )}
                 <div className="hover:scale-110 window-controls">
                   <button onClick={() => setActiveWindow(null)}>✕</button>
                 </div>
@@ -164,19 +175,31 @@ function PortfolioHero() {
               {activeWindow === 'admin' ? (
                 <div>
                   {!isAuthenticated ? (
-                    <>
+                    <div className='flex gap-4'>
                       <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter password"
+                        className='font-pixelify'
                       />
-                      <button onClick={handleLogin}>Login</button>
-                    </>
+                      <button 
+                        className="font-pixelify hover:scale-110 cursor-pointer border px-2 py-1" 
+                        onClick={handleLogin}>
+                        Login
+                      </button>
+                    </div>
                   ) : (
-                    <div>
-                      <p>Welcome Admin </p>
-                      <p>Press 🔐 to edit, delete and add projects </p>
+                    <div className='font-pixelify'>
+                      <p>Welcome Admin 👤 </p>
+                      <p>Here is your token ꄗ!</p>
+                      <p>Click the token icon to access the admin panel</p>
+                      <p>Or else, click the logout button</p>
+                      <button 
+                        className="font-pixelify hover:scale-110 cursor-pointer border px-2 py-1" 
+                        onClick={handleLogout}>
+                        Logout
+                      </button>
                     </div>
                   )}
                 </div>
@@ -187,7 +210,7 @@ function PortfolioHero() {
                     <a
                       href={link}
                       key={name}
-                      className="folder-item"
+                      className="folder-item font-pixelify"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -207,10 +230,10 @@ function PortfolioHero() {
       <div className="taskbar animate-slide-In-Up">
         <Link to="/" className="start-button">
           <img src="./windows_logo.png" alt="start" />
-          <span>Start</span>
+          <span className='hover:scale-110 font-pixelify font-bold'>Start</span>
         </Link>
 
-        <div className="taskbar-clock">
+        <div className="taskbar-clock font-pixelify">
           {new Date().toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit'
