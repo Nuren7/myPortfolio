@@ -25,7 +25,7 @@ router.post("/", checkAdmin, async (req, res) => {
 
     const result = await pool.query(
       "INSERT INTO projects (name, link, description, type) VALUES ($1,$2,$3,$4) RETURNING *",
-      [name, link, description, type]
+      [name, link, description, type],
     );
 
     res.json(result.rows[0]);
@@ -42,7 +42,7 @@ router.put("/:id", checkAdmin, async (req, res) => {
 
     const result = await pool.query(
       "UPDATE projects SET name=$1, link=$2, description=$3, type=$4 WHERE id=$5 RETURNING *",
-      [name, link, description, type, id]
+      [name, link, description, type, id],
     );
 
     res.json(result.rows[0]);

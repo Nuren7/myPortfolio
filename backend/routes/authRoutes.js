@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
 const pool = require("../db/db");
-const { setAdminToken, checkAdmin } = require("./middleware/authmiddleware");
 
-/* LOGIN */
 router.post("/admin-login", async (req, res) => {
   try {
     const { password } = req.body;
@@ -23,8 +21,9 @@ router.post("/admin-login", async (req, res) => {
       return res.json({ success: false });
     }
 
-    const token = Math.random().toString(36).substr(2);
-    setAdminToken(token);
+    const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
 
     res.json({ success: true, token });
   } catch (err) {
@@ -32,9 +31,22 @@ router.post("/admin-login", async (req, res) => {
   }
 });
 
-/* CHECK */
-router.get("/admin-check", checkAdmin, (req, res) => {
-  res.json({ success: true });
+router.get("/admin-check", (req, res) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(403).json({ success: false });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.role !== "admin") {
+      return res.status(403).json({ success: false });
+    }
+    res.json({ success: true });
+  } catch (err) {
+    res.status(403).json({ success: false });
+  }
 });
 
 module.exports = router;
