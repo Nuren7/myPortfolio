@@ -19,22 +19,29 @@ function PortfolioHero() {
  /* FETCH */
   useEffect(() => {
     const fetchProjects = async () => {
-      const res = await fetch("http://localhost:3000/api/projects");
-      const data = await res.json();
-
-      const grouped = {
-        frontend: [],
-        fullstack: [],
-        backend: []
-      };
-
-      data.forEach(project => {
-        if (grouped[project.type]) {
-          grouped[project.type].push(project);
+      try {
+        const res = await fetch("http://localhost:3000/api/projects");
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
-      });
+        const data = await res.json();
 
-      setProjects(grouped);
+        const grouped = {
+          frontend: [],
+          fullstack: [],
+          backend: []
+        };
+
+        data.forEach(project => {
+          if (grouped[project.type]) {
+            grouped[project.type].push(project);
+          }
+        });
+
+        setProjects(grouped);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
     };
 
     fetchProjects();
