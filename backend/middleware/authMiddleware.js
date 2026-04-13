@@ -10,12 +10,11 @@ const checkAdmin = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // optional but good practice
     if (decoded.role !== "admin") {
       return res.status(403).json({ error: "Not admin" });
     }
 
-    req.user = decoded; // attach user info if needed
+    req.user = decoded; 
 
     next();
   } catch (err) {
