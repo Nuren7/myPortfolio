@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 function PortfolioInfo() {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const words = [
       "Click Me! ↓",
       "Explore My Projects!"
