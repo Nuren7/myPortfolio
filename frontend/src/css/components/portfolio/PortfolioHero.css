@@ -76,6 +76,20 @@
   background: transparent;
   cursor: pointer;
 }
+.contact-icon-button {
+  position: fixed;      
+  bottom: 70px;             
+  right: 25px;   
+
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  background: transparent;
+  cursor: pointer; 
+}
 
 /* Hover */
 .icon-button:hover {
@@ -87,6 +101,10 @@
 }
 
 .token-icon-button:hover {
+  scale: 1.1;
+}
+
+.contact-icon-button:hover {
   scale: 1.1;
 }
 
@@ -113,6 +131,15 @@
 }
 
 .token-icon-button span {
+  font-size: 12px;
+  color: black;
+}
+
+.contact-icon-button img {
+  width: 50px;
+}
+
+.contact-icon-button span {
   font-size: 12px;
   color: black;
 }
@@ -214,6 +241,7 @@
 .folder-item:hover {
   scale: 1.1;
 }
+
 /* TASKBAR */
 .taskbar {
   position: fixed;
