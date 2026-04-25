@@ -126,7 +126,6 @@ function PortfolioHero() {
     setActiveWindow(null);
   }
 
-  /* UI */
   return (
     <div
       className="hero-container"
