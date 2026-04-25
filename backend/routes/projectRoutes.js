@@ -7,9 +7,21 @@ const { checkAdmin } = require("../middleware/authMiddleware");
 /* GET */
 router.get("/", async (req, res) => {
   try {
+    console.log("Fetching projects");
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id SERIAL PRIMARY KEY,
+        name TEXT,
+        link TEXT,
+        description TEXT,
+        type TEXT
+      )
+    `);
     const result = await pool.query("SELECT * FROM projects ORDER BY id DESC");
+    console.log("Projects:", result.rows);
     res.json(result.rows);
-  } catch {
+  } catch (err) {
+    console.error("Error fetching projects:", err);
     res.status(500).json({ error: "Server Error" });
   }
 });

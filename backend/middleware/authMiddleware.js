@@ -1,21 +1,22 @@
 const jwt = require("jsonwebtoken");
 
 const checkAdmin = (req, res, next) => {
-  const token = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(403).json({ error: "No token" });
   }
 
+  const token = authHeader.split(" ")[1];
+
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, "testsecret");
 
     if (decoded.role !== "admin") {
       return res.status(403).json({ error: "Not admin" });
     }
 
-    req.user = decoded; 
-
+    req.user = decoded;
     next();
   } catch (err) {
     return res.status(403).json({ error: "Invalid token" });
