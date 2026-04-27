@@ -26,7 +26,7 @@ function Desktop() {
 
       {/* EXTRA ICONS */}
       <button
-        className="contact-icon-button"
+        className="icon-base contact-icon-button icon-button"
         onClick={() => setActiveWindow("Contact")}
       >
         <img src="./contact.png" />
@@ -34,7 +34,7 @@ function Desktop() {
       </button>
 
       <button
-        className="admin-icon-button"
+        className="icon-base admin-icon-button icon-button"
         onClick={() => setActiveWindow("Admin")}
       >
         <img src="./admin.png" />
@@ -43,7 +43,7 @@ function Desktop() {
 
        {/*TOKEN*/}
         {isAuthenticated && (
-        <Link to="/admin" className="token-icon-button">
+        <Link to="/admin" className="icon-base token-icon-button icon-button">
           <img src="./token.png" />
             <span className="font-pixelify font-bold">Token</span>
         </Link>

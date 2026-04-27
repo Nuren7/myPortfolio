@@ -13,6 +13,16 @@ export function useDraggable() {
     };
   };
 
+  const onTouchStart = (e) => {
+    dragging.current = true;
+    const touch = e.touches[0];
+    offset.current = {
+      x: touch.clientX - position.x,
+      y: touch.clientY - position.y,
+    };
+    e.preventDefault();
+  };
+
   const onMouseMove = (e) => {
     if (!dragging.current) return;
 
@@ -22,7 +32,22 @@ export function useDraggable() {
     });
   };
 
+  const onTouchMove = (e) => {
+    if (!dragging.current) return;
+
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - offset.current.x,
+      y: touch.clientY - offset.current.y,
+    });
+    e.preventDefault();
+  };
+
   const onMouseUp = () => {
+    dragging.current = false;
+  };
+
+  const onTouchEnd = () => {
     dragging.current = false;
   };
 
@@ -31,7 +56,10 @@ export function useDraggable() {
     handlers: {
       onMouseDown,
       onMouseMove,
-      onMouseUp
+      onMouseUp,
+      onTouchStart,
+      onTouchMove,
+      onTouchEnd
     }
   };
 }

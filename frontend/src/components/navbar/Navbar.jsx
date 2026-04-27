@@ -11,6 +11,7 @@ import WelcomeLoader from './WelcomeLoader'
 
 function Navbar() {
 
+
   const { goTo, loading } = usePageTransition();
   const [pageName, setPageName] = useState("")
   const [showNavbar, setShowNavbar] = useState(false)
@@ -36,7 +37,7 @@ function Navbar() {
       <nav className="
         navbar-style animate-slide-In-Down">
 
-        <Logo onClick={() => {setPageName("Home");goTo('/');}} src="/my_logo.png" alt="my_logo" />
+      <Logo onClick={() => {setPageName("Home");goTo('/');}} src="/my_logo.png" alt="my_logo" />
 
         <ul className="flex gap-4 list-none">
 
@@ -46,10 +47,10 @@ function Navbar() {
               Portfolio
             </Button>
           </li>
-          <li>
+          <li className='font-pixelify'>
             <Button 
               onClick={() => {setPageName("About me");goTo('/about');}}>
-                about me
+                About Me
             </Button>
           </li>
         </ul>

@@ -1,0 +1,85 @@
+/*PHONE */
+@media (max-width: 480px) {
+
+  /* HERO */
+  .hero-container {
+    background-image: url('./windows_logo.png');
+    background-size: 150px;
+  }
+
+  /*PROJECT ICON SIDEBAR*/
+  .icon-sidebar {
+    top: auto;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  /* WINDOWS */
+  .retro-window {
+    width: 60vw;
+    height: 200px;
+    box-shadow: none;
+  }
+
+  .window-content {
+    min-height: 120px;
+    padding: 10px;
+  }
+
+  /* FOLDERS / PROJECT ICONS */
+  .folder-item img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .folder-container {
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* FIXED ICONS */
+  .admin-icon-button {
+    top: 50px;
+    right: 10px;
+  }
+
+  .token-icon-button {
+    top: 100px;
+    right: 10px;
+  }
+
+  .contact-icon-button {
+    bottom: 75px;
+    right: 10px;
+  }
+
+  /* Optional sizing tweak */
+  .icon-button {
+    width: 70px;
+  }
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+
+  .retro-window {
+    width: 90vw;
+    height: 400px;
+  }
+
+  .folder-item img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .folder-container {
+    gap: 12px;
+    padding: 12px;
+  }
+}
