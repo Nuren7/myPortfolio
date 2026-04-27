@@ -35,7 +35,7 @@ function Desktop() {
 
       <button
         className="admin-icon-button"
-        onClick={() => setActiveWindow("admin")}
+        onClick={() => setActiveWindow("Admin")}
       >
         <img src="./admin.png" />
         <span className="font-pixelify font-bold">Admin</span>
@@ -57,7 +57,7 @@ function Desktop() {
           position={position}
           dragHandlers={handlers}
         >
-          {activeWindow === "admin" && (
+          {activeWindow === "Admin" && (
             <AdminWindow
               isAuthenticated={isAuthenticated}
               login={login}
@@ -75,6 +75,21 @@ function Desktop() {
           )}
         </RetroWindow>
       )}
+      
+      {/* TASKBAR */}
+      <div className="taskbar animate-slide-In-Up">
+        <Link to="/" className="start-button">
+          <img src="./windows_logo.png" alt="start" />
+          <span className='hover:scale-110 font-pixelify font-bold'>Start</span>
+        </Link>
+
+        <div className="taskbar-clock font-pixelify">
+          {new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
+        </div>
+      </div>
     </div>
   );
 }

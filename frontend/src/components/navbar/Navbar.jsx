@@ -40,10 +40,10 @@ function Navbar() {
 
         <ul className="flex gap-4 list-none">
 
-          <li>
+          <li className='font-pixelify'>
             <Button 
             onClick={() => {setPageName("Portfolio");goTo('/portfolio');}}>
-              portfolio
+              Portfolio
             </Button>
           </li>
           <li>
@@ -52,13 +52,6 @@ function Navbar() {
                 about me
             </Button>
           </li>
-          <li>
-            <Button 
-              onClick={() => {setPageName("Contact");goTo('/contact');}}>
-                contact
-              </Button>
-            </li>
-
         </ul>
 
       </nav>
