@@ -26,7 +26,7 @@ function Desktop() {
 
       {/* EXTRA ICONS */}
       <button
-        className="contact-icon-button"
+        className="icon-base contact-icon-button icon-button"
         onClick={() => setActiveWindow("Contact")}
       >
         <img src="./contact.png" />
@@ -34,8 +34,8 @@ function Desktop() {
       </button>
 
       <button
-        className="admin-icon-button"
-        onClick={() => setActiveWindow("admin")}
+        className="icon-base admin-icon-button icon-button"
+        onClick={() => setActiveWindow("Admin")}
       >
         <img src="./admin.png" />
         <span className="font-pixelify font-bold">Admin</span>
@@ -43,7 +43,7 @@ function Desktop() {
 
        {/*TOKEN*/}
         {isAuthenticated && (
-        <Link to="/admin" className="token-icon-button">
+        <Link to="/admin" className="icon-base token-icon-button icon-button">
           <img src="./token.png" />
             <span className="font-pixelify font-bold">Token</span>
         </Link>
@@ -57,7 +57,7 @@ function Desktop() {
           position={position}
           dragHandlers={handlers}
         >
-          {activeWindow === "admin" && (
+          {activeWindow === "Admin" && (
             <AdminWindow
               isAuthenticated={isAuthenticated}
               login={login}
@@ -75,6 +75,21 @@ function Desktop() {
           )}
         </RetroWindow>
       )}
+      
+      {/* TASKBAR */}
+      <div className="taskbar animate-slide-In-Up">
+        <Link to="/" className="start-button">
+          <img src="./windows_logo.png" alt="start" />
+          <span className='hover:scale-110 font-pixelify font-bold'>Start</span>
+        </Link>
+
+        <div className="taskbar-clock font-pixelify">
+          {new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}
+        </div>
+      </div>
     </div>
   );
 }

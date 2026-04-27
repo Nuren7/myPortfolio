@@ -146,7 +146,7 @@ function Admin() {
   };
 
   return (
-    <div className="admin-container">
+    <div className="admin-container w-full min-h-screen bg-stone-300">
 
       {/* HEADER */}
       <div className="admin-header">
