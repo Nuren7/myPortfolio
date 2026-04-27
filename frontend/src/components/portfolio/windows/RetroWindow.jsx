@@ -5,7 +5,7 @@ function RetroWindow({ title, children, onClose, position, dragHandlers, noOverl
         className="retro-window"
         onMouseMove={dragHandlers.onMouseMove}
         onMouseUp={dragHandlers.onMouseUp}
-        style={{ transform: `translate(${position.x}px, ${position.y}px)`, zIndex: 1000, background: 'white' }}
+        style={{ transform: `translate(${position.x}px, ${position.y}px)`, zIndex: 100, background: 'white' }}
       >
         <div
           className="window-header"

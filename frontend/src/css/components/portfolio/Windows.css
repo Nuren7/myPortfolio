@@ -54,10 +54,6 @@
   cursor: pointer;
 }
 
-.window-controls button:hover {
-  background: #ffffff;
-}
-
 /* CONTENT */
 .window-content {
   flex: 1;
