@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 import Button from './Button'  
 import Logo from './Logo'
-import usePageTransition from './ugitsePageTransition'
+import usePageTransition from './usePageTransition'
 import WelcomeLoader from './WelcomeLoader'
 
 
