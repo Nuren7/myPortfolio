@@ -20,7 +20,7 @@ import "./css/animations/Fade.css"
 import "./css/animations/Slide.css"
 import "./css/animations/InfiniteScroll.css"
 import "./css/animations/Typing.css"
-import "./css/animations/Blink.css"
+import "./css/animations/blink.css"
 
 
 createRoot(document.getElementById('root')).render(
