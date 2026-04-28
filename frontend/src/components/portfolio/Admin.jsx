@@ -174,7 +174,7 @@ function Admin() {
           <div className="row-content">
             {grouped[type]?.map((project) => (
               <div key={project.id} className="project-card cursor-pointer hover:scale-105">
-                <img src="./folder_icon.png" alt="folder" />
+                <img src="/folder_icon.png" alt="folder" />
                 <span>{project.name}</span>
 
                 {editMode && (

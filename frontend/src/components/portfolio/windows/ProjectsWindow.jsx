@@ -9,7 +9,7 @@ function ProjectsWindow({ projects }) {
           rel="noopener noreferrer"
           className="folder-item"
         >
-          <img src="./folder_icon.png" />
+          <img src="/folder_icon.png" />
           <span className="font-pixelify">{name}</span>
         </a>
       ))}

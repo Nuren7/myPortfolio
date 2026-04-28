@@ -29,7 +29,7 @@ function Desktop() {
         className="icon-base contact-icon-button icon-button"
         onClick={() => setActiveWindow("Contact")}
       >
-        <img src="./contact.png" />
+        <img src="/contact.png" />
         <span className="font-pixelify font-bold">Contact</span>
       </button>
 
@@ -37,14 +37,14 @@ function Desktop() {
         className="icon-base admin-icon-button icon-button"
         onClick={() => setActiveWindow("Admin")}
       >
-        <img src="./admin.png" />
+        <img src="/admin.png" />
         <span className="font-pixelify font-bold">Admin</span>
       </button>
 
        {/*TOKEN*/}
         {isAuthenticated && (
         <Link to="/admin" className="icon-base token-icon-button icon-button">
-          <img src="./token.png" />
+          <img src="/token.png" />
             <span className="font-pixelify font-bold">Token</span>
         </Link>
         )}
@@ -79,7 +79,7 @@ function Desktop() {
       {/* TASKBAR */}
       <div className="taskbar animate-slide-In-Up">
         <Link to="/" className="start-button">
-          <img src="./windows_logo.png" alt="start" />
+          <img src="/windows_logo.png" alt="start" />
           <span className='hover:scale-110 font-pixelify font-bold'>Start</span>
         </Link>
 

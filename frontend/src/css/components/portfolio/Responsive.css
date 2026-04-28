@@ -3,7 +3,7 @@
 
   /* HERO */
   .hero-container {
-    background-image: url('./windows_logo.png');
+    background-image: url('/windows_logo.png');
     background-size: 150px;
   }
 
