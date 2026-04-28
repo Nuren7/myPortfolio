@@ -8,6 +8,8 @@ function Button({ onClick ,children }) {
       onClick={onClick}
       className="
         btn-link
+        text-stone-500 
+        hover:opacity-50
       "
     >
       {children}

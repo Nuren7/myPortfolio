@@ -12,9 +12,8 @@
 
 .btn-link {
   @apply relative inline-block text-[80%]
-         text-stone-500 px-2 sm:px-3
-         transition-colors duration-300
-         hover:opacity-50;
+         px-2 sm:px-3
+         transition-colors duration-300;
 }
 
  .btn-link::after {
