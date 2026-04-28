@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
-import "./css/Index.css"
+import "./css/index.css"
 import "./css/components/navbar/Navbar.css"
 import "./css/components/WelcomeLoader.css"
 import "./css/components/portfolio/PortfolioHero.css"
