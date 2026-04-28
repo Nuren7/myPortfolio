@@ -8,7 +8,6 @@ function Button({ onClick ,children }) {
       onClick={onClick}
       className="
         btn-link
-        slow-underline
       "
     >
       {children}
