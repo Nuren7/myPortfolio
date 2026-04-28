@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: karina127
+      POSTGRES_DB: myPortfolio
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: karina127
+      DB_NAME: myPortfolio
+      DB_PORT: "5432"
+      JWT_SECRET: testsecret
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+    driver: local
