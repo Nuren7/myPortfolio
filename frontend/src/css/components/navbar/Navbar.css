@@ -11,10 +11,13 @@
 }
 
 .btn-link {
-  @apply relative inline-flex text-[80%]
+  @apply relative inline-block text-[80%]
          text-stone-500 px-2 sm:px-3
-         transition-colors duration-500
-         hover:opacity-50;
+         transition-colors duration-300;
+}
+
+.btn-link:hover {
+  opacity: 0.5; 
 }
 
 }
