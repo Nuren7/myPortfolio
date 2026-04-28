@@ -4,6 +4,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const pool = require("../db/db");
 
+router.get("/", (req, res) => {
+  res.json({ message: "Backend is running", status: "ok" });
+});
+
 router.post("/admin-login", async (req, res) => {
   try {
     const { password } = req.body;
@@ -60,6 +64,16 @@ router.get("/admin-check", (req, res) => {
   } catch (err) {
     console.log("Verify error:", err.message);
     res.status(403).json({ success: false });
+  }
+});
+
+router.get("/test-db", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({ success: true, time: result.rows[0] });
+  } catch (err) {
+    console.error("DB test error:", err);
+    res.status(500).json({ success: false, error: err.message });
   }
 });
 

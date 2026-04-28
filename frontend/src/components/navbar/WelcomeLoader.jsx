@@ -17,11 +17,34 @@ function WelcomeLoader({ active, pageName }) {
     Home: "font-monteserrat",
   };
 
+  const isPortfolio = pageName === "Portfolio";
+
   const fontClass = fontMap[pageName] || "font-monteserrat";
 
   const [index, setIndex] = useState(0);
   const [hasBeenActive, setHasBeenActive] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const totalBlocks = 20;
+  const filledBlocks = Math.round((progress / 100) * totalBlocks);
+
+      useEffect(() => {
+      if (!active || !isPortfolio) return;
+
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setProgress(0);
+
+      const t1 = setTimeout(() => setProgress(20), 300);
+      const t2 = setTimeout(() => setProgress(80), 1200);
+      const t3 = setTimeout(() => setProgress(100), 2000);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      }
+    }, [active, isPortfolio]);
 
   // Handle visibility (intro/outro)
   useEffect(() => {
@@ -65,6 +88,25 @@ function WelcomeLoader({ active, pageName }) {
         ${active ? "animate-page-intro" : "animate-page-outro pointer-events-none"}
       `}
     >
+    {isPortfolio ? (
+      <div className="text-white font-pixelify">
+          <div className="flex justify-between text-xl mb-2">
+           <p>LOADING...</p>
+            <p>{progress}%</p>
+        </div>
+
+        <div className="flex gap-1 border-white border-2 p-1 mt-2">
+          {Array.from({ length: totalBlocks }).map((_, i) => (
+            <div
+              key={i}
+              className={`w-3 h-4 ${
+                i < filledBlocks ? "bg-white rounded-xs" : "bg-transparent"
+              }`}
+            />
+          ))}
+       </div>
+      </div>
+      ) : (
       <div className="overflow-hidden">
         <h1
           key={index}
@@ -77,6 +119,7 @@ function WelcomeLoader({ active, pageName }) {
           {greetings[index]}
         </h1>
       </div>
+    )}
     </div>
   );
 }
