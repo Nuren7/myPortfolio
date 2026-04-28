@@ -36,24 +36,31 @@ function Navbar() {
     {showNavbar && (
       <nav className="
         navbar-style animate-slide-In-Down">
+        
+        <div className='w-full flex justify-between items-center px-6 sm:px-10 lg:px-16'>
 
-      <Logo onClick={() => {setPageName("Home");goTo('/');}} src="/my_logo.png" alt="my_logo" />
+          <Logo 
+          onClick={() => {setPageName("Home");goTo('/');}} 
+          src="/my_logo.png" 
+          alt="my_logo" />
 
-        <ul className="flex gap-4 list-none">
+          <ul className="flex gap-4 list-none">
 
-          <li className='font-pixelify'>
-            <Button 
-            onClick={() => {setPageName("Portfolio");goTo('/portfolio');}}>
-              Portfolio
-            </Button>
-          </li>
-          <li className='font-pixelify'>
-            <Button 
-              onClick={() => {setPageName("About me");goTo('/about');}}>
-                About Me
-            </Button>
-          </li>
-        </ul>
+            <li className='font-pixelify'>
+              <Button 
+                onClick={() => {setPageName("Portfolio");goTo('/portfolio');}}>
+                Portfolio
+              </Button>
+            </li>
+            <li className='font-pixelify'>
+              <Button 
+                onClick={() => {setPageName("About me");goTo('/about');}}>
+                  About Me
+              </Button>
+            </li>
+          </ul>
+
+        </div>
 
       </nav>
     )}
