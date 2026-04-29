@@ -1,13 +1,27 @@
+FROM node:24-slim AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+# safer than npm ci during unstable lockfile phase
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+
 FROM node:24-slim
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
-RUN npm ci
+RUN npm install --omit=dev
 
-COPY . .
+COPY --from=builder /app/dist ./dist
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["node", "dist/server.js"]

@@ -21,12 +21,10 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DB_HOST: db
-      DB_USER: postgres
-      DB_PASSWORD: karina127
-      DB_NAME: myPortfolio
-      DB_PORT: "5432"
+      DATABASE_URL: postgresql://postgres:karina127@db:5432/myPortfolio
       JWT_SECRET: testsecret
+      ADMIN_PASSWORD: karina127
+      CLIENT_URL: http://localhost:5173
     depends_on:
       - db
 
