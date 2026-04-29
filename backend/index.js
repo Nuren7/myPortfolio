@@ -17,8 +17,8 @@ app.use((req, res, next) => {
 });
 
 /* ROUTES */
-app.use("/", authRoutes);
-app.use("/projects", projectRoutes);
+app.use("/api", authRoutes);
+app.use("/api/projects", projectRoutes);
 
 /* SERVER */
 app.listen(3000, () => {

@@ -6,7 +6,7 @@ export function useAuth() {
   );
 
   const login = async (password) => {
-    const res = await fetch("http://localhost:3000/admin-login", {
+    const res = await fetch("/api/admin-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password })
@@ -33,7 +33,7 @@ export function useAuth() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const res = await fetch("http://localhost:3000/admin-check", {
+      const res = await fetch("/api/admin-check", {
         headers: { Authorization: `Bearer ${token}` }
       });
 

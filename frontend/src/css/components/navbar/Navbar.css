@@ -4,7 +4,7 @@
 @layer components {
 
 .navbar-style {
-  @apply fixed top-6 left-1/2 -translate-x-1/2 
+  @apply absolute top-6 left-1/2 -translate-x-1/2 
          max-w-6xl w-full z-50
          flex justify-between items-center
          bg-transparent;

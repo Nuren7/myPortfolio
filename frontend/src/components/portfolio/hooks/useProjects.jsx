@@ -6,7 +6,7 @@ export function useProjects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch("http://localhost:3000/projects");
+        const res = await fetch("/api/projects");
         const data = await res.json();
 
         const grouped = {

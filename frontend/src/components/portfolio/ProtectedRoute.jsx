@@ -14,7 +14,7 @@ function ProtectedRoute({ children }) {
           return;
         }
 
-        const res = await fetch("http://localhost:3000/admin-check", {
+        const res = await fetch("/api/admin-check", {
           headers: {
             Authorization: `Bearer ${token}`, 
           },

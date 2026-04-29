@@ -46,7 +46,7 @@ function Admin() {
   /* FETCH */
   const fetchProjects = async () => {
     try {
-      const res = await fetch("http://localhost:3000/projects");
+      const res = await fetch("/api/projects");
       const data = await res.json();
 
       setProjects(data);      
@@ -85,8 +85,8 @@ function Admin() {
   const handleSave = async () => {
     try {
       const url = isAdding
-        ? "http://localhost:3000/projects"
-        : `http://localhost:3000/projects/${activeProject.id}`;
+        ? "/api/projects"
+        : `/api/projects/${activeProject.id}`;
       const method = isAdding ? "POST" : "PUT";
 
       const res = await fetch(url, {
@@ -123,7 +123,7 @@ function Admin() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/projects/${id}`, {
+      const res = await fetch(`/api/projects/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
