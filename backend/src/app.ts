@@ -32,6 +32,12 @@ app.get("/", (_req, res) => {
   res.send("API running");
 });
 
+/* method check */
+app.use((req, _res, next) => {
+  console.log("➡", req.method, req.url);
+  next();
+});
+
 /*GLOBAL ERROR HANDLER*/
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error("Unhandled error:", err);
