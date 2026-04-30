@@ -24,7 +24,6 @@ function Admin() {
 
   const [formData, setFormData] = useState(emptyProject);
 
-  /* GROUP PROJECTS */
   const groupProjects = (data) => {
     const groupedData = {
       frontend: [],
@@ -41,7 +40,6 @@ function Admin() {
     setGrouped(groupedData);
   };
 
-  /* FETCH PROJECTS */
   const fetchProjects = async () => {
     try {
       const data = await apiFetch("/projects");
@@ -58,7 +56,6 @@ function Admin() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* EDIT */
   const handleEditClick = (project) => {
     setActiveProject(project);
     setFormData({
@@ -71,14 +68,12 @@ function Admin() {
     setShowModal(true);
   };
 
-  /* ADD */
   const handleAddClick = () => {
     setFormData(emptyProject);
     setIsAdding(true);
     setShowModal(true);
   };
 
-  /* SAVE */
   const handleSave = async () => {
     try {
       const endpoint = isAdding
@@ -103,7 +98,6 @@ function Admin() {
     }
   };
 
-  /* DELETE */
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure?");
     if (!confirmDelete) return;
@@ -122,19 +116,35 @@ function Admin() {
 
   return (
     <div className="admin-container w-full min-h-screen bg-stone-300">
+      
       <div className="admin-header">
         <h1 className="font-pixelify">Admin Panel</h1>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
+
           <span className="font-pixelify">
             {editMode ? "Edit Mode" : "View Mode"}
           </span>
 
-          <button onClick={() => setEditMode(!editMode)}>
+          {/* EDIT / EXIT BUTTON */}
+          <button
+            onClick={() => setEditMode(!editMode)}
+            className={`px-3 py-1 border-2 font-pixelify transition-all duration-200 cursor-pointer
+              ${editMode 
+                ? "bg-red-500 text-white border-red-600 hover:bg-red-600"
+                : "bg-green-500 text-white border-green-600 hover:bg-green-600"
+              }`}
+          >
             {editMode ? "Exit" : "Edit"}
           </button>
 
-          <button onClick={handleAddClick}>Add</button>
+          <button
+            onClick={handleAddClick}
+            className="border-2 cursor-pointer px-3 py-1 font-pixelify hover:bg-stone-400"
+          >
+            Add
+          </button>
+
         </div>
       </div>
 
@@ -209,8 +219,14 @@ function Admin() {
 
               <div className="modal-buttons">
                 <button onClick={handleSave}>Done</button>
-                <button onClick={() => setShowModal(false)}>Cancel</button>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="border-2 cursor-pointer"
+                >
+                  Cancel
+                </button>
               </div>
+
             </div>
           </div>
         </div>

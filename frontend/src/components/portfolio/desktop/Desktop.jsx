@@ -25,7 +25,7 @@ function Desktop() {
   };
 
   return (
-    <div className="hero-container">
+    <div className="hero-container mobile-hero-image">
 
       {/* LEFT SIDEBAR */}
       <Sidebar setActiveWindow={setActiveWindow} />

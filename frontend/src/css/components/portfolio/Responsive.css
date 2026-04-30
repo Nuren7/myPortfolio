@@ -7,6 +7,10 @@
     background-size: 120px;
   }
 
+  .mobile-hero-image {
+    bottom: 40px;
+  }
+
   /*PROJECT ICON SIDEBAR*/
   .icon-sidebar {
     top: auto;

@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react"
 
 function HeroInfo() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const words = [
     "Hi, I'm Nuren a FullStack Developer",
     "Here are some of my talents",

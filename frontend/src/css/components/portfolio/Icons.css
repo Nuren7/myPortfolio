@@ -1,6 +1,6 @@
 /* ICON SIDEBAR */
 .icon-sidebar {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
