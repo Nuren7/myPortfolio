@@ -3,6 +3,9 @@ function ProjectsWindow({ projects }) {
     return (
       <div className="folder-container">
         <p className="font-pixelify">No projects found.</p>
+        <p className="font-pixelify">Backend is deployed on Render FREE</p>
+        <p className="font-pixelify">And might be deactive due to innactivity</p>
+        <p className="font-pixelify">Please contact me trough my socials</p>
       </div>
     );
   }
