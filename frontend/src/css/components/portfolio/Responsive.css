@@ -4,7 +4,7 @@
   /* HERO */
   .hero-container {
     background-image: url('/windows_logo.png');
-    background-size: 150px;
+    background-size: 120px;
   }
 
   /*PROJECT ICON SIDEBAR*/
@@ -61,8 +61,13 @@
 
   /* Optional sizing tweak */
   .icon-button {
-    width: 70px;
+    width: 60px;
   }
+
+  .icon-base img {
+  width: 40px !important;
+}
+
 }
 
 /* TABLET */

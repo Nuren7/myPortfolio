@@ -49,7 +49,7 @@ function PortfolioInfo() {
   
   return (
         
-    <div className="hidden md:flex fixed inset-0  items-center justify-end px-10 text-right">
+    <div className="flex fixed inset-0  items-center justify-end px-10 text-right">
       <h1 className="portfolio-info text-stone-500">
         {text}
         <span className="hero-title animate-blink">⌷</span> 
