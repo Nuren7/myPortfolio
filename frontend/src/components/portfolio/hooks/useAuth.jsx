@@ -1,46 +1,48 @@
 import { useEffect, useState } from "react";
+import { apiFetch } from "../../../config/api";
 
 export function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
+  /* LOGIN */
   const login = async (password) => {
-    const res = await fetch("/api/admin-login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password })
-    });
+    try {
+      const data = await apiFetch("/admin-login", {
+        method: "POST",
+        body: JSON.stringify({ password }),
+      });
 
-    const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setIsAuthenticated(true);
+        return true;
+      }
 
-    if (data.success) {
-      localStorage.setItem("token", data.token);
-      setIsAuthenticated(true);
-      return true;
+      return false;
+    } catch (err) {
+      console.error("Login failed:", err);
+      return false;
     }
-
-    return false;
   };
 
+  /* LOGOUT */
   const logout = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
   };
 
-  useEffect(() => {
-    const verify = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      const res = await fetch("/api/admin-check", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      const data = await res.json();
+  /* VERIFY TOKEN */
+  const verify = async () => {
+    try {
+      const data = await apiFetch("/admin-check");
       setIsAuthenticated(data.success);
-    };
+    } catch {
+      setIsAuthenticated(false);
+    }
+  };
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     verify();
   }, []);
 

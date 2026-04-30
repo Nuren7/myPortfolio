@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
+import { apiFetch } from "../../config/api";
+
 function ProtectedRoute({ children }) {
   const [isValid, setIsValid] = useState(null);
 
@@ -14,17 +16,11 @@ function ProtectedRoute({ children }) {
           return;
         }
 
-        const res = await fetch("/api/admin-check", {
-          headers: {
-            Authorization: `Bearer ${token}`, 
-          },
-        });
-
-        const data = await res.json();
+        const data = await apiFetch("/admin-check");
 
         setIsValid(data.success);
       } catch (err) {
-        console.error(err);
+        console.error("Auth check failed:", err);
         setIsValid(false);
       }
     };

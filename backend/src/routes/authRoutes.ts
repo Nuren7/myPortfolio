@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { pool } from "../db/db";
 import { config } from "../config";
+import { checkAdmin } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
@@ -27,6 +28,11 @@ router.post("/admin-login", async (req, res) => {
   const token = jwt.sign({}, config.jwtSecret, { expiresIn: "1h" });
 
   res.json({ success: true, token });
+});
+
+/* ADD THIS */
+router.get("/admin-check", checkAdmin, (req, res) => {
+  res.json({ success: true });
 });
 
 export default router;

@@ -18,13 +18,19 @@ function Desktop() {
   const { isAuthenticated, login, logout } = useAuth();
   const { position, handlers } = useDraggable();
 
+  const safeProjects = {
+    frontend: projects?.frontend || [],
+    backend: projects?.backend || [],
+    fullstack: projects?.fullstack || [],
+  };
+
   return (
     <div className="hero-container">
 
       {/* LEFT SIDEBAR */}
       <Sidebar setActiveWindow={setActiveWindow} />
 
-      {/* EXTRA ICONS */}
+      {/* CONTACT ICON */}
       <button
         className="icon-base contact-icon-button icon-button"
         onClick={() => setActiveWindow("Contact")}
@@ -33,6 +39,7 @@ function Desktop() {
         <span className="font-pixelify font-bold">Contact</span>
       </button>
 
+      {/* ADMIN ICON */}
       <button
         className="icon-base admin-icon-button icon-button"
         onClick={() => setActiveWindow("Admin")}
@@ -41,13 +48,16 @@ function Desktop() {
         <span className="font-pixelify font-bold">Admin</span>
       </button>
 
-       {/*TOKEN*/}
-        {isAuthenticated && (
-        <Link to="/admin" className="icon-base token-icon-button icon-button">
+      {/* TOKEN (ONLY IF AUTHENTICATED) */}
+      {isAuthenticated && (
+        <Link
+          to="/admin"
+          className="icon-base token-icon-button icon-button"
+        >
           <img src="/token.png" />
-            <span className="font-pixelify font-bold">Token</span>
+          <span className="font-pixelify font-bold">Token</span>
         </Link>
-        )}
+      )}
 
       {/* WINDOWS */}
       {activeWindow && (
@@ -65,28 +75,29 @@ function Desktop() {
             />
           )}
 
-
           {activeWindow === "Contact" && <ContactWindow />}
 
           {["Frontend", "Backend", "Fullstack"].includes(activeWindow) && (
             <ProjectsWindow
-              projects={projects[activeWindow.toLowerCase()]}
+              projects={safeProjects[activeWindow.toLowerCase()]}
             />
           )}
         </RetroWindow>
       )}
-      
+
       {/* TASKBAR */}
       <div className="taskbar animate-slide-In-Up">
         <Link to="/" className="start-button">
           <img src="/windows_logo.png" alt="start" />
-          <span className='hover:scale-110 font-pixelify font-bold'>Start</span>
+          <span className="hover:scale-110 font-pixelify font-bold">
+            Start
+          </span>
         </Link>
 
         <div className="taskbar-clock font-pixelify">
           {new Date().toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit'
+            hour: "2-digit",
+            minute: "2-digit",
           })}
         </div>
       </div>

@@ -15,8 +15,6 @@ function Admin() {
   const [showModal, setShowModal] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-  const token = localStorage.getItem("token");
-
   const emptyProject = {
     name: "",
     link: "",
@@ -43,11 +41,10 @@ function Admin() {
     setGrouped(groupedData);
   };
 
-  /* FETCH (GET) */
+  /* FETCH PROJECTS */
   const fetchProjects = async () => {
     try {
       const data = await apiFetch("/projects");
-
       setProjects(data);
       groupProjects(data);
     } catch (err) {
@@ -61,7 +58,7 @@ function Admin() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /* OPEN EDIT */
+  /* EDIT */
   const handleEditClick = (project) => {
     setActiveProject(project);
     setFormData({
@@ -74,14 +71,14 @@ function Admin() {
     setShowModal(true);
   };
 
-  /* OPEN ADD */
+  /* ADD */
   const handleAddClick = () => {
     setFormData(emptyProject);
     setIsAdding(true);
     setShowModal(true);
   };
 
-  /* SAVE (POST / PUT) */
+  /* SAVE */
   const handleSave = async () => {
     try {
       const endpoint = isAdding
@@ -92,9 +89,6 @@ function Admin() {
 
       await apiFetch(endpoint, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: JSON.stringify(formData),
       });
 
@@ -111,36 +105,31 @@ function Admin() {
 
   /* DELETE */
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete?");
+    const confirmDelete = window.confirm("Are you sure?");
     if (!confirmDelete) return;
 
     try {
       await apiFetch(`/projects/${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       fetchProjects();
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Unable to delete project.");
+      alert("Unable to delete.");
     }
   };
 
   return (
     <div className="admin-container w-full min-h-screen bg-stone-300">
-      {/* HEADER */}
       <div className="admin-header">
         <h1 className="font-pixelify">Admin Panel</h1>
 
         <div className="flex gap-3">
-          {editMode ? (
-            <span className="font-pixelify text-red-500">Edit Mode</span>
-          ) : (
-            <span className="font-pixelify text-green-500">View Mode</span>
-          )}
+          <span className="font-pixelify">
+            {editMode ? "Edit Mode" : "View Mode"}
+          </span>
+
           <button onClick={() => setEditMode(!editMode)}>
             {editMode ? "Exit" : "Edit"}
           </button>
@@ -149,7 +138,6 @@ function Admin() {
         </div>
       </div>
 
-      {/* PROJECT ROWS */}
       {["frontend", "fullstack", "backend"].map((type) => (
         <div key={type} className="project-row">
           <h2 className="row-title">{type}</h2>
@@ -162,12 +150,8 @@ function Admin() {
 
                 {editMode && (
                   <div className="actions">
-                    <button onClick={() => handleEditClick(project)}>
-                      ✎
-                    </button>
-                    <button onClick={() => handleDelete(project.id)}>
-                      🗑
-                    </button>
+                    <button onClick={() => handleEditClick(project)}>✎</button>
+                    <button onClick={() => handleDelete(project.id)}>🗑</button>
                   </div>
                 )}
               </div>
@@ -176,7 +160,6 @@ function Admin() {
         </div>
       ))}
 
-      {/* MODAL */}
       {showModal && (
         <div className="window-overlay">
           <div className="retro-window">
@@ -226,16 +209,7 @@ function Admin() {
 
               <div className="modal-buttons">
                 <button onClick={handleSave}>Done</button>
-
-                <button
-                  onClick={() => {
-                    setShowModal(false);
-                    setFormData(emptyProject);
-                    setActiveProject(null);
-                  }}
-                >
-                  Cancel
-                </button>
+                <button onClick={() => setShowModal(false)}>Cancel</button>
               </div>
             </div>
           </div>
