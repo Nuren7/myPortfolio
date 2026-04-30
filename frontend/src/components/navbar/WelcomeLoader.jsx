@@ -12,8 +12,7 @@ function WelcomeLoader({ active, pageName }) {
   // Font mapping per page
   const fontMap = {
     Portfolio: "font-pixelify",
-    "About me": "font-serif",
-    Contact: "font-mono",
+    "About me": "font-Pixelify",
     Home: "font-monteserrat",
   };
 

@@ -6,11 +6,12 @@ function HeroInfo() {
     "Hi, I'm Nuren a FullStack Developer",
     "Here are some of my talents",
     "Fullstack",
-    "React Angular Vue",
-    "Node.js Java Python Ruby",
-    "MySQL PostgreSQL NoSQL MongoDB",
+    "React Vite Angular Vue",
+    "Node.js Java Python Typescript",
+    "MySQL PostgreSQL NoSQL",
     "DevOps & Cloud",
-    "CI/CD pipelines Git/Lab/Hub Docker AWS Heroku"
+    "CI/CD pipelines Git/Lab/Hub Docker",
+    "Vercel Render"
   ]
 
 
@@ -55,7 +56,7 @@ function HeroInfo() {
 
   return (
     
-    <div className="fixed inset-0 flex items-center justify-end px-10 text-right">
+    <div className="fixed inset-0 flex items-start justify-end pt-50 px-10 text-right">
       <h1 className="hero-title text-stone-500">
         {text}
         <span className="hero-title animate-blink">|</span> 

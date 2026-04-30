@@ -48,6 +48,12 @@ function Navbar() {
 
             <li className='font-pixelify'>
               <Button 
+                onClick={() => {setPageName("Home");goTo('/');}}>
+                  Home
+              </Button>
+            </li>
+            <li className='font-pixelify'>
+              <Button 
                 onClick={() => {setPageName("Portfolio");goTo('/portfolio');}}>
                 Portfolio
               </Button>
