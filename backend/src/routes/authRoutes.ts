@@ -19,7 +19,7 @@ router.post("/admin-login", async (req, res) => {
 
   const admin = result.rows[0];
 
-  const match = await bcrypt.compare(password, admin.password);
+  const match = await bcrypt.compare(password, admin.password_hash);
 
   if (!match) {
     return res.status(401).json({ success: false });

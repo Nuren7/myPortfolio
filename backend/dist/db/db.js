@@ -5,5 +5,7 @@ const pg_1 = require("pg");
 const config_1 = require("../config");
 exports.pool = new pg_1.Pool({
     connectionString: config_1.config.databaseUrl,
-    ssl: { rejectUnauthorized: false },
+    ssl: {
+        rejectUnauthorized: false
+    }
 });

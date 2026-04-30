@@ -8,6 +8,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const db_1 = require("../db/db");
 const config_1 = require("../config");
+const authMiddleware_1 = require("../middleware/authMiddleware");
 const router = express_1.default.Router();
 /* LOGIN */
 router.post("/admin-login", async (req, res) => {
@@ -17,11 +18,15 @@ router.post("/admin-login", async (req, res) => {
         return res.status(404).json({ success: false });
     }
     const admin = result.rows[0];
-    const match = await bcrypt_1.default.compare(password, admin.password);
+    const match = await bcrypt_1.default.compare(password, admin.password_hash);
     if (!match) {
         return res.status(401).json({ success: false });
     }
     const token = jsonwebtoken_1.default.sign({}, config_1.config.jwtSecret, { expiresIn: "1h" });
     res.json({ success: true, token });
+});
+/* ADD THIS */
+router.get("/admin-check", authMiddleware_1.checkAdmin, (req, res) => {
+    res.json({ success: true });
 });
 exports.default = router;
