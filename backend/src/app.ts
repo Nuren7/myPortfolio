@@ -10,7 +10,7 @@ const app = express();
 /* CORS */
 app.use(
   cors({
-    origin: [config.clientUrl, "http://localhost:5173"],
+    origin: ["https://nurenislam.vercel.app", "http://localhost:5173"],
     credentials: true,
   })
 );
