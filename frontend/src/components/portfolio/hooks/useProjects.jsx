@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
+import {apiFetch} from "../../../config/api";
+
 export function useProjects() {
   const [projects, setProjects] = useState({});
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch("/api/projects");
-        const data = await res.json();
+        const data = await apiFetch("/projects");
 
         const grouped = {
           frontend: [],
