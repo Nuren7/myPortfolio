@@ -9,6 +9,9 @@ export function useAuth() {
     try {
       const data = await apiFetch("/admin-login", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ password }),
       });
 
@@ -34,9 +37,22 @@ export function useAuth() {
   /* VERIFY TOKEN */
   const verify = async () => {
     try {
-      const data = await apiFetch("/admin-check");
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setIsAuthenticated(false);
+        return;
+      }
+
+      const data = await apiFetch("/admin-check", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       setIsAuthenticated(data.success);
-    } catch {
+    } catch (err) {
+      console.error("Auth check failed:", err);
       setIsAuthenticated(false);
     }
   };

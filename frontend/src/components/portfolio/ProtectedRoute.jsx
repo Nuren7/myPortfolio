@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-
 import { apiFetch } from "../../config/api";
 
 function ProtectedRoute({ children }) {
@@ -16,7 +15,11 @@ function ProtectedRoute({ children }) {
           return;
         }
 
-        const data = await apiFetch("/admin-check");
+        const data = await apiFetch("/admin-check", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         setIsValid(data.success);
       } catch (err) {

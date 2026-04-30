@@ -25,12 +25,16 @@ router.post("/admin-login", async (req, res) => {
     return res.status(401).json({ success: false });
   }
 
-  const token = jwt.sign({}, config.jwtSecret, { expiresIn: "1h" });
+  const token = jwt.sign(
+    { role: "admin" },
+    config.jwtSecret,
+    { expiresIn: "1h" }
+  );
 
   res.json({ success: true, token });
 });
 
-/* ADD THIS */
+/* CHECK AUTH */
 router.get("/admin-check", checkAdmin, (req, res) => {
   res.json({ success: true });
 });
