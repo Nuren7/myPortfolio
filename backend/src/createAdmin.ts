@@ -21,4 +21,4 @@ async function createAdmin(password: string) {
   }
 }
 
-createAdmin("yourPasswordHere");
+createAdmin("karina127");
