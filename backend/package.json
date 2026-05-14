@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "clean": "rm -rf dist",
-    "create-admin": "ts-node src/createAdmin.ts"
+    "create-admin": "ts-node src/createAdmin.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
