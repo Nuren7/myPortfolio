@@ -23,7 +23,6 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:karina127@db:5432/myPortfolio
       JWT_SECRET: testsecret
-      ADMIN_PASSWORD: karina127
       CLIENT_URL: http://localhost:5173
     depends_on:
       - db
