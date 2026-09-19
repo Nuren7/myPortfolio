@@ -1,7 +1,7 @@
 export const localProjects = [
   {
     id: "local-1",
-    name: "studybuddy.io",
+    name: "studybuddy.io RAG",
     link: "https://github.com/Nuren7/studybuddy.io",
     description: "Ai chat bot for students to help them with their studies.",
     type: "fullstack",
@@ -48,5 +48,13 @@ export const localProjects = [
     link: "https://github.com/Nuren7/ManagementRESTAPI",
     description: "A REST API for managing backend operations.",
     type: "backend",
+  },
+  {
+    id: "local-8",
+    name: "LangGraphTool-CallingAgent",
+    link: "https://github.com/Nuren7/langGraphTool-CallingAgent",
+    description:
+      "A tool for managing and visualizing language graphs with a calling agent.",
+    type: "fullstack",
   },
 ];
