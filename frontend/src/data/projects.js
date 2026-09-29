@@ -57,4 +57,18 @@ export const localProjects = [
       "A tool for managing and visualizing language graphs with a calling agent.",
     type: "fullstack",
   },
+  {
+    id: "local-9",
+    name: "VanOps Dashboard",
+    link: "https://github.com/Nuren7/VanOps-Dashboard",
+    description: "A dashboard for managing and visualizing VanOps operations.",
+    type: "fullstack",
+  },
+  {
+    id: "local-10",
+    name: "FixFlow",
+    link: "https://github.com/Nuren7/FixFlow",
+    description: "A dashboard for managing and visualizing FixFlow operations.",
+    type: "fullstack",
+  },
 ];
